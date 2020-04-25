@@ -4,18 +4,18 @@ import pygame
 pygame.init()
 
 # Fonts------------------------------------------
-font_headings = pygame.font.SysFont(None, 60) # czcionka nagłówków
-font_options = pygame.font.SysFont(None, 40) # czcionka tekstów z menu'sów
+FONT_HEADINGS = pygame.font.SysFont(None, 60) # czcionka nagłówków
+FONT_OPTIONS = pygame.font.SysFont(None, 40) # czcionka tekstów z menu'sów
 
 # Colors-----------------------------------------
-COLOR_BACKGROUND = (0, 0, 0)  # czarny
+COLOR_BACKGROUND = (41, 39, 36)  # ciemny
 COLOR_MENU = (223, 240, 235) # białawo-błękitny
-COLOR_GAME_OVER_MENU = (0, 0, 0)  # czarny
-COLOR_WIN_MENU = (0, 0, 0)  # czarny
-COLOR_BUTTON = (255, 0, 0) # czerwony
-COLOR_BALL = (255, 0, 0)  # czerwony
-COLOR_RACKET = (0, 255, 0)  # zielony
-COLOR_BLOCK = (0, 0, 255)  # niebieski
+COLOR_GAME_OVER_MENU = (219, 83, 100)  # czerwono jakiś
+COLOR_WIN_MENU = (139, 191, 128)  # zielono jakiś
+COLOR_BUTTON = (62, 102, 138) # niebiesko jakiś
+COLOR_BALL = (255, 15, 35)  # czerwony
+COLOR_RACKET = (70, 150, 60)  # ciemna zieleń
+COLOR_BLOCK = (34, 105, 125)  # niebieski
 
 # Ball-------------------------------------------
 # Prędkość poruszania piłki
@@ -29,7 +29,7 @@ BALL_START_Y = 50
 
 # Racket-----------------------------------------
 RACKET_WIDTH = 80
-RACKET_HEIGHT = 15
+RACKET_HEIGHT = 16
 RACKET_X = RACKET_WIDTH/2 - 40
 RACKET_Y = RACKET_HEIGHT - 40
 
@@ -51,7 +51,7 @@ WINDOW_HEIGHT = 600
 # Game over menu---------------------------------
 
 # Button-----------------------------------------
-BUTTON_WIDTH = 300
+BUTTON_WIDTH = 250
 BUTTON_HEIGHT = 80
 
 # Judge------------------------------------------

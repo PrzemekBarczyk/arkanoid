@@ -27,12 +27,12 @@ class Window:
         głównej pętli programu. 'Options' wywołuje funkcję odpowiedzialną za wyświetlenie menu z opcjami.
         'Exit' dezaktywuje bibliotekę pygame, po czym kończy pracę programu funkcją exit(0)"""
         x, y = 0, 0  # współrzędne kursora myszy
-        headline_color = (0, 0, 0)  # kolor nagłówka menu
+        headline_color = (18, 49, 77)  # kolor nagłówka menu
         text_color = (255, 255, 255)  # kolor napisów na przyciskach
         while True:
             print("main menu")
             self.surface.fill(constants.COLOR_MENU)  # koloruje tło menu
-            window.print_headline("MENU", headline_color)  # wypisuje nagłówek menu
+            window.print_headline("Main menu", headline_color)  # wypisuje nagłówek menu
 
             # tworzy obiekty będące przyciskami
             x_button = self.width / 2 - constants.BUTTON_WIDTH / 2  # współrzędna x lewej krawędzi przycisku
@@ -63,7 +63,7 @@ class Window:
                         exit(0)
 
     def options_menu(self, window):
-        """Tworzy menu z opcjami: 'resolution' i 'background color'. Użytkownik może je zmieniać przy użyciu LPM.
+        """Tworzy menu z opcjami: 'difficulty' i 'background color'. Użytkownik może je zmieniać przy użyciu LPM.
         Pod opcjami znajduje się przycisk 'return' który kończy działanie tej funkcji i wraca do miejsca
         wywołania - funkcji main_menu(). Ten sam efekt powrotu do poprzedniego menu można uzyskać przy użyciu
         klawisza ESCAPE"""
@@ -75,12 +75,12 @@ class Window:
 
         # tworzy obiekty będące przyciskami
         x_button = self.width / 2 - constants.BUTTON_WIDTH / 2  # współrzędna x lewej krawędzi przycisku
-        resolution = buttons.Button("resolution", x_button, 100, text_color=text_color)
+        difficulty = buttons.Button("difficulty", x_button, 100, text_color=text_color)
         background_color = buttons.Button("background color", x_button, 200, text_color=text_color)
         return_main_menu = buttons.Button("return", x_button, 300, text_color=text_color)
 
         # rysuje przyciski na ekranie
-        resolution.draw(window)
+        difficulty.draw(window)
         background_color.draw(window)
         return_main_menu.draw(window)
 
@@ -99,7 +99,7 @@ class Window:
                     if event.key == pygame.K_ESCAPE:  # ESCAPE
                         return  # wróć do menu głównego
                 if event.type == pygame.MOUSEBUTTONDOWN:  # wciśnięto klawisz myszy
-                    if event.button == 1 and resolution.rect.collidepoint(x, y):  # LPM i kursor nad 'resolution'
+                    if event.button == 1 and difficulty.rect.collidepoint(x, y):  # LPM i kursor nad 'resolution'
                         pass
                         # TODO: rozbudować
                     if event.button == 1 and background_color.rect.collidepoint(x, y):  # LPM i kursor nad 'backgroud..'
@@ -248,7 +248,7 @@ class Window:
 
     def print_headline(self, text, color):
         """Funkcja pomocnicza do pisania nagłówku w menu"""
-        headline_obj = constants.font_headings.render(text, True, color)
+        headline_obj = constants.FONT_HEADINGS.render(text, True, color)
         headline_rect = headline_obj.get_rect()
         headline_rect.center = (self.width / 2, 30)
         self.surface.blit(headline_obj, headline_rect)

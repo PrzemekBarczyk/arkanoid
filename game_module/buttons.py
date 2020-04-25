@@ -26,7 +26,7 @@ class Button:
         """Rysuje przycisk"""
         pygame.draw.rect(window.surface, self.button_color, self.rect) # rysuje tło przycisku
 
-        text_obj = constants.font_options.render(self.name, True, self.text_color)
+        text_obj = constants.FONT_OPTIONS.render(self.name, True, self.text_color)
         text_rect = text_obj.get_rect()
         text_rect.center = (self.x + self.width / 2, self.y + self.height / 2)
         window.surface.blit(text_obj, text_rect)

@@ -1,5 +1,4 @@
 """Klasa rakietki"""
-# TODO: Dodać limit prędkości przy poruszaniu paletki
 
 import pygame
 from game_module import constants
@@ -24,16 +23,16 @@ class Racket:
     def move(self, x_cord):
         """Przesuwa rakietkę o wyznaczone miejsce"""
         # oblicz przesunięcie paletki gracza
-        delta = x_cord - (self.width / 2)
+        x_cord_new = x_cord - (self.width / 2)  # wyznacza nowe współrzędne paletki
 
         # jeżeli wykraczamy poza okno gry w prawo
-        if delta > constants.WINDOW_WIDTH - self.width:
-            delta = constants.WINDOW_WIDTH - self.width
+        if x_cord_new > constants.WINDOW_WIDTH - self.width:
+            x_cord_new = constants.WINDOW_WIDTH - self.width
         # jeżeli wykraczamy poza okno gry w lewo
-        if delta < 0:
-            delta = 0
+        if x_cord_new < 0:
+            x_cord_new = 0
         # zaktualizuj położenie paletki w poziomie
-        self.rect.x = delta
+        self.rect.x = x_cord_new
 
     def draw(self, window):
         """Rysuje piłkę w oknie"""
