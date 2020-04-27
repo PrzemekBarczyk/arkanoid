@@ -13,11 +13,10 @@ class Block:
         self.height = constants.BLOCK_HEIGHT
         self.color = constants.COLOR_BLOCK
 
-        self.surface = pygame.Surface([self.width, self.height])  # utworzenie powierzchni ...
-        # obiektu
+        # utworzenie powierzchni obiektu
+        self.surface = pygame.Surface([self.width, self.height])  # utworzenie powierzchni obiektu
         self.surface.fill(constants.COLOR_BLOCK) # pokolorowanie powierzchni
-        self.rect = self.surface.get_rect(x=x, y=y)  # ustawienie prostokąta zawierającego ...
-        # obiekt w początkowej pozycji
+        self.rect = self.surface.get_rect(x=x, y=y)  # ustawienie prostokąta zawierającego obiekt w początkowej pozycji
 
     def draw(self, window):
         """Rysuje bloki w oknie"""

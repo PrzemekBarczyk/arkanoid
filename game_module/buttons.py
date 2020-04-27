@@ -10,7 +10,7 @@ class Button:
     zaznaczając ich pole i klikając LPM"""
 
     def __init__(self, name, x, y, width=constants.BUTTON_WIDTH, height=constants.BUTTON_HEIGHT,
-                 button_color=constants.COLOR_BUTTON, text_color=(255, 255, 255)):
+                 button_color=constants.COLOR_BUTTON, text_color=constants.COLOR_BUTTON_TEXT):
         """Kontruktor"""
         self.name = name
         self.x = x
