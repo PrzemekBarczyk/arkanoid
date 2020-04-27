@@ -8,11 +8,23 @@ FONT_HEADINGS = pygame.font.SysFont(None, 60) # czcionka nagłówków
 FONT_OPTIONS = pygame.font.SysFont(None, 40) # czcionka tekstów z menu'sów
 
 # Colors-----------------------------------------
+# MENUS
 COLOR_BACKGROUND = (41, 39, 36)  # ciemny
 COLOR_MENU = (223, 240, 235) # białawo-błękitny
+COLOR_MENU_HEADLINE = (18, 49, 77)
+COLOR_MENU_TEXT = (255, 255, 255)
 COLOR_GAME_OVER_MENU = (219, 83, 100)  # czerwono jakiś
+COLOR_GAME_OVER_MENU_HEADLINE = (0, 0, 0)
+COLOR_GAME_OVER_MENU_TEXT = (255, 255, 255)
+COLOR_PAUSE_MENU = (0, 0, 0)
+COLOR_PAUSE_MENU_HEADLINE = (0, 0, 0)
+COLOR_PAUSE_MENU_TEXT = (255, 255, 255)
 COLOR_WIN_MENU = (139, 191, 128)  # zielono jakiś
+COLOR_WIN_MENU_HEADLINE = (0, 255, 0)
+COLOR_WIN_MENU_TEXT = (255, 255, 255)
+# OTHERS
 COLOR_BUTTON = (62, 102, 138) # niebiesko jakiś
+COLOR_BUTTON_TEXT = (255, 255, 255)
 COLOR_BALL = (255, 15, 35)  # czerwony
 COLOR_RACKET = (70, 150, 60)  # ciemna zieleń
 COLOR_BLOCK = (34, 105, 125)  # niebieski

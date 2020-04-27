@@ -15,11 +15,10 @@ from game_module import level
 
 
 class Game:
-    """Klasa nadzorująca pracę całego programu"""
+    """Klasa nadzorująca pracę całego programu."""
 
     # Konfiguracja programu
     def __init__(self):
-        pygame.init()  # inicjalizuje biblioteki pygame
         self.fps_clock = pygame.time.Clock()  # zegar do kontrolowania szybkości rysowania kolejnych klatek gry
         self.window = window.Window()  # tworzy okienko
         self.ball = ball.Ball()  # tworzy piłkę
@@ -29,7 +28,7 @@ class Game:
     def run(self, game):
         """Główna pętla progamu"""
         self.window.main_menu(self.window)  # rysuje menu główne i czeka na wybór użytkownika
-        while not self.handle_events():  # działaj w pętli do momentu otrzymania sygnału do wyjścia
+        while not self.handle_events(game):  # działaj w pętli do momentu otrzymania sygnału do wyjścia
             self.ball.move(self.player, self.level.blocks, self.window, game)  # wyznacza przemieszczenie piłki
             # rysowanie obiektów
             self.window.draw()  # rysuje okno
@@ -40,7 +39,7 @@ class Game:
             pygame.display.update()  # nanoszenie zmian na ekran
             self.fps_clock.tick(constants.FPS_LIMIT)  # ogranicznik FPS
 
-    def handle_events(self):
+    def handle_events(self, game):
         """Funkcja obsługująca zdarzenia systemowe"""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:  # wciśnięto krzyżyk w prawym-górnym rogu ekranu
@@ -60,7 +59,14 @@ class Game:
         self.level.reset_configuration()
 
 
+def main():
+    pygame.init()  # inicjalizuje biblioteki pygame
+    pygame.font.init()
+
+    game = Game()
+    game.run(game)
+
+
 if __name__ == "__main__":
     """Tworzy obiekt klasy gry i uruchamia jej metodę run() (główną pętlę programu)"""
-    game = Game()  # tworzy obiekt Game
-    game.run(game)  # uruchamia główną pętle programu
+    main()

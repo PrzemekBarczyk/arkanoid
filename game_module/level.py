@@ -1,6 +1,5 @@
-"""Klasa sędziego gry"""
+"""Klasa poziomu gry"""
 
-import pygame
 from game_module import constants
 from game_module import block
 

@@ -27,18 +27,16 @@ class Window:
         głównej pętli programu. 'Options' wywołuje funkcję odpowiedzialną za wyświetlenie menu z opcjami.
         'Exit' dezaktywuje bibliotekę pygame, po czym kończy pracę programu funkcją exit(0)"""
         x, y = 0, 0  # współrzędne kursora myszy
-        headline_color = (18, 49, 77)  # kolor nagłówka menu
-        text_color = (255, 255, 255)  # kolor napisów na przyciskach
         while True:
             print("main menu")
             self.surface.fill(constants.COLOR_MENU)  # koloruje tło menu
-            window.print_headline("Main menu", headline_color)  # wypisuje nagłówek menu
+            window.print_headline("Main menu", constants.COLOR_MENU_HEADLINE)  # wypisuje nagłówek menu
 
             # tworzy obiekty będące przyciskami
             x_button = self.width / 2 - constants.BUTTON_WIDTH / 2  # współrzędna x lewej krawędzi przycisku
-            start = buttons.Button("start", x_button, 100, text_color=text_color)
-            options = buttons.Button("options", x_button, 200, text_color=text_color)
-            close = buttons.Button("exit", x_button, 300, text_color=text_color)
+            start = buttons.Button("start", x_button, 100, text_color=constants.COLOR_MENU_TEXT)
+            options = buttons.Button("options", x_button, 200, text_color=constants.COLOR_MENU_TEXT)
+            close = buttons.Button("exit", x_button, 300, text_color=constants.COLOR_MENU_TEXT)
 
             # rysuje przyciski na ekranie
             start.draw(window)
@@ -68,16 +66,14 @@ class Window:
         wywołania - funkcji main_menu(). Ten sam efekt powrotu do poprzedniego menu można uzyskać przy użyciu
         klawisza ESCAPE"""
         x, y = 0, 0  # współrzedne kursora myszy
-        headline_color = (0, 0, 0)  # kolor nagłówka menu
-        text_color = (255, 255, 255)  # kolor napisów na przyciskach
         self.surface.fill(constants.COLOR_MENU)  # koloruje tło menu
-        window.print_headline("Settings", headline_color)  # wypisuje nagłówek menu
+        window.print_headline("Settings", constants.COLOR_MENU_HEADLINE)  # wypisuje nagłówek menu
 
         # tworzy obiekty będące przyciskami
         x_button = self.width / 2 - constants.BUTTON_WIDTH / 2  # współrzędna x lewej krawędzi przycisku
-        difficulty = buttons.Button("difficulty", x_button, 100, text_color=text_color)
-        background_color = buttons.Button("background color", x_button, 200, text_color=text_color)
-        return_main_menu = buttons.Button("return", x_button, 300, text_color=text_color)
+        difficulty = buttons.Button("difficulty", x_button, 100, text_color=constants.COLOR_MENU_TEXT)
+        background_color = buttons.Button("background color", x_button, 200, text_color=constants.COLOR_MENU_TEXT)
+        return_main_menu = buttons.Button("return", x_button, 300, text_color=constants.COLOR_MENU_TEXT)
 
         # rysuje przyciski na ekranie
         difficulty.draw(window)
@@ -118,16 +114,14 @@ class Window:
         odpowiada za wybranie opcji 'exit'."""
         game.reset()  # resetuje stan gry
         x, y = 0, 0  # współrzedne kursora myszy
-        headline_color = (0, 0, 0)  # kolor nagłówka menu
-        text_color = (255, 255, 255)  # kolor napisów na przyciskach
         self.surface.fill(constants.COLOR_GAME_OVER_MENU)  # koloruje tło menu
-        window.print_headline("GAME OVER", headline_color)  # wypisuje nagłówek menu
+        window.print_headline("GAME OVER", constants.COLOR_GAME_OVER_MENU_HEADLINE)  # wypisuje nagłówek menu
 
         # tworzy obiekty będące przyciskami
         x_button = self.width / 2 - constants.BUTTON_WIDTH / 2  # współrzędna x lewej krawędzi przycisku
-        try_again = buttons.Button("try again", x_button, 100, text_color=text_color)
-        main_menu = buttons.Button("main menu", x_button, 200, text_color=text_color)
-        close = buttons.Button("exit", x_button, 300, text_color=text_color)
+        try_again = buttons.Button("try again", x_button, 100, text_color=constants.COLOR_GAME_OVER_MENU_TEXT)
+        main_menu = buttons.Button("main menu", x_button, 200, text_color=constants.COLOR_GAME_OVER_MENU_TEXT)
+        close = buttons.Button("exit", x_button, 300, text_color=constants.COLOR_GAME_OVER_MENU_TEXT)
 
         # rysuje przyciski na ekranie
         try_again.draw(window)
@@ -166,16 +160,14 @@ class Window:
         programu. 'Exit' kończy pracę programu. Powrót do rozgrywki możliwy jest również przy użyciu tych samych
         klawiszy które słuszą do wywołania menu."""
         x, y = 0, 0  # współrzedne kursora myszy
-        headline_color = (0, 0, 0)  # kolor nagłówka menu
-        text_color = (255, 255, 255)  # kolor napisów na przyciskach
-        self.surface.fill(constants.COLOR_GAME_OVER_MENU)  # koloruje tło menu
-        window.print_headline("pause", headline_color)  # wypisuje nagłówek menu
+        self.surface.fill(constants.COLOR_PAUSE_MENU)  # koloruje tło menu
+        window.print_headline("pause", constants.COLOR_PAUSE_MENU_HEADLINE)  # wypisuje nagłówek menu
 
         # tworzy obiekty będące przyciskami
         x_button = self.width / 2 - constants.BUTTON_WIDTH / 2  # współrzędna x lewej krawędzi przycisku
-        continue_button = buttons.Button("continue", x_button, 100, text_color=text_color)
-        main_menu = buttons.Button("main menu", x_button, 200, text_color=text_color)
-        close = buttons.Button("exit", x_button, 300, text_color=text_color)
+        continue_button = buttons.Button("continue", x_button, 100, text_color=constants.COLOR_PAUSE_MENU_TEXT)
+        main_menu = buttons.Button("main menu", x_button, 200, text_color=constants.COLOR_PAUSE_MENU_TEXT)
+        close = buttons.Button("exit", x_button, 300, text_color=constants.COLOR_PAUSE_MENU_TEXT)
 
         # rysuje przyciski na ekranie
         continue_button.draw(window)
@@ -210,16 +202,14 @@ class Window:
         które przenosi do menu głównego poprzez wywołanie funkcji game.run(game), oraz 'exit' który kończy pracę
         programu."""
         x, y = 0, 0  # współrzędne kursora myszy
-        headline_color = (0, 255, 0)  # kolor nagłówka menu (zielony)
-        text_color = (255, 255, 255)  # kolor napisów na przyciskach (biały)
         while True:
             self.surface.fill(constants.COLOR_WIN_MENU)  # koloruje tło menu
-            window.print_headline("You won!", headline_color)  # wypisuje nagłówek menu
+            window.print_headline("You won!", constants.COLOR_WIN_MENU_HEADLINE)  # wypisuje nagłówek menu
 
             # tworzy obiekty będące przyciskami
             x_button = self.width / 2 - constants.BUTTON_WIDTH / 2  # współrzędna x lewej krawędzi przycisku
-            main_menu = buttons.Button("main menu", x_button, 100, text_color=text_color)
-            close = buttons.Button("exit", x_button, 200, text_color=text_color)
+            main_menu = buttons.Button("main menu", x_button, 100, text_color=constants.COLOR_WIN_MENU_TEXT)
+            close = buttons.Button("exit", x_button, 200, text_color=constants.COLOR_WIN_MENU_TEXT)
 
             # rysuje przyciski na ekranie
             main_menu.draw(window)
