@@ -1,4 +1,4 @@
-Gałąź odpowiedzialna za najpilniejsze poprawki do programu.
+Hotfix branch: gałąź odpowiedzialna za najpilniejsze poprawki do programu.
 
 Opisy wprowadzonych zmian w zależności od wersji:
 - v0.1 - wprowadzono poprawki na podstawie punktów 1-7 z Uwag
