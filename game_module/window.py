@@ -26,7 +26,7 @@ class Window:
         'Start' kończy działanie funkcji po czym program przechodzi do wykonywania funkcji znajdujących się w
         głównej pętli programu. 'Options' wywołuje funkcję odpowiedzialną za wyświetlenie menu z opcjami.
         'Exit' dezaktywuje bibliotekę pygame, po czym kończy pracę programu funkcją exit(0)"""
-        x, y = 0, 0  # współrzędne kursora myszy
+
         while True:
             print("main menu")
             self.surface.fill(constants.COLOR_MENU)  # koloruje tło menu
@@ -45,27 +45,20 @@ class Window:
 
             pygame.display.update()  # nanosi zmiany na ekran
 
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:  # wciśnięto krzyżyk w prawym-górnym rogu okna programu
-                    pygame.quit()
-                    exit(0)
-                if event.type == pygame.MOUSEMOTION:  # mysz się porusza
-                    x, y = event.pos  # zapisuje aktualne współrzędne kursora
-                if event.type == pygame.MOUSEBUTTONDOWN:  # klawisz myszy wciśnięty
-                    if event.button == 1 and start.rect.collidepoint(x, y):  # LPM i kursor na przyciskiem start
-                        return  # wraca do pętli głównej programu (odpala gre)
-                    if event.button == 1 and options.rect.collidepoint(x, y):  # LPM i kursor nad przyciskiem opctions
-                        window.options_menu(window)  # uruchamia menu opcji
-                    if event.button == 1 and close.rect.collidepoint(x, y):  # LPM i kursor nad przyciskiem close
-                        pygame.quit()
-                        exit(0)
+            button_number = check_which_button((start, options, close))  # zwraca nr naciśniętego przycisku
+            if button_number == 1:  # przycisk 'start'
+                return  # wraca do pętli głównej programu (odpala gre)
+            elif button_number == 2:  # przycisk 'options'
+                window.options_menu(window)  # uruchamia menu opcji
+            elif button_number == 3:  # przycisk 'close'
+                pygame.quit()
+                exit(0)
 
     def options_menu(self, window):
         """Tworzy menu z opcjami: 'difficulty' i 'background color'. Użytkownik może je zmieniać przy użyciu LPM.
         Pod opcjami znajduje się przycisk 'return' który kończy działanie tej funkcji i wraca do miejsca
         wywołania - funkcji main_menu(). Ten sam efekt powrotu do poprzedniego menu można uzyskać przy użyciu
         klawisza ESCAPE"""
-        x, y = 0, 0  # współrzedne kursora myszy
         self.surface.fill(constants.COLOR_MENU)  # koloruje tło menu
         window.print_headline("Settings", constants.COLOR_MENU_HEADLINE)  # wypisuje nagłówek menu
 
@@ -83,26 +76,17 @@ class Window:
         pygame.display.update()  # nanosi zmiany na ekran
 
         while True:
-            print("options")
-
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:  # wciśnięto krzyżyk w prawym-górnym rogu okna programu
-                    pygame.quit()
-                    exit(0)
-                if event.type == pygame.MOUSEMOTION:  # mysz się porusza
-                    x, y = event.pos  # zapisuje aktualne współrzędne kursora
-                if event.type == pygame.KEYDOWN:  # wciśnięto klawisz na klawiaturze
-                    if event.key == pygame.K_ESCAPE:  # ESCAPE
-                        return  # wróć do menu głównego
-                if event.type == pygame.MOUSEBUTTONDOWN:  # wciśnięto klawisz myszy
-                    if event.button == 1 and difficulty.rect.collidepoint(x, y):  # LPM i kursor nad 'resolution'
-                        pass
-                        # TODO: rozbudować
-                    if event.button == 1 and background_color.rect.collidepoint(x, y):  # LPM i kursor nad 'backgroud..'
-                        pass
-                        # TODO: rozbudować
-                    if event.button == 1 and return_main_menu.rect.collidepoint(x, y):  # LPM i kursor nad 'return'
-                        return  # wróć do menu głównego
+            print("settings menu")
+            button_number = check_which_button((difficulty, background_color, return_main_menu))  # zwraca nr naciśniętego przycisku
+            if button_number == 1:  # LPM i kursor nad 'difficulty'
+                pass
+                # TODO: rozbudować
+            elif button_number == 2:  # LPM i kursor nad 'backgroud...'
+                pass
+                # TODO: rozbudować
+            elif button_number == 3:  # LPM i kursor nad 'return'
+                button_number = 0
+                return  # wróć do menu głównego
 
     def game_over_menu(self, window, game):
         """Tworzy menu końca gry. Uruchamia się pod tym jak piłka wypadnie poza dół okienka programu i resetuje
@@ -113,7 +97,6 @@ class Window:
         programu. 'Exit' kończy pracę programu. Opcje możliwe są do wyboru przy użyciu LPM, ponadto klawisz ESCAPE
         odpowiada za wybranie opcji 'exit'."""
         game.reset()  # resetuje stan gry
-        x, y = 0, 0  # współrzedne kursora myszy
         self.surface.fill(constants.COLOR_GAME_OVER_MENU)  # koloruje tło menu
         window.print_headline("GAME OVER", constants.COLOR_GAME_OVER_MENU_HEADLINE)  # wypisuje nagłówek menu
 
@@ -132,25 +115,14 @@ class Window:
 
         while True:
             print("game over")
-
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:  # wciśnięto krzyżyk w prawym górnym rogu ekranu
-                    pygame.quit()
-                    exit(0)
-                if event.type == pygame.MOUSEMOTION:  # mysz się porusza
-                    x, y = event.pos  # zapisuje aktualne współrzędne kursora
-                if event.type == pygame.KEYDOWN:  # wciśnięto klawisz na klawiaturze
-                    if event.key == pygame.K_ESCAPE:  # ESCAPE
-                        pygame.quit()
-                        exit(0)
-                if event.type == pygame.MOUSEBUTTONDOWN:  # wciśnięto klawisz myszy
-                    if event.button == 1 and try_again.rect.collidepoint(x, y):  # LPM i 'try again'
-                        return
-                    if event.button == 1 and main_menu.rect.collidepoint(x, y):  # LPM i 'main menu'
-                        game.run(game)
-                    if event.button == 1 and close.rect.collidepoint(x, y):  # LPM i 'exit'
-                        pygame.quit()
-                        exit(0)
+            button_number = check_which_button((try_again, main_menu, close))  # zwraca nr naciśniętego przycisku
+            if button_number == 1:  # LPM i 'try again'     (LPM - Lewy Przycisk Myszy)
+                return
+            elif button_number == 2:  # LPM i 'main menu'
+                game.run(game)
+            elif button_number == 3:  # LPM i 'exit'
+                pygame.quit()
+                exit(0)
 
     def pause_menu(self, window, game):
         """Tworzy menu pauzy które można wywołać klawiszem ESCAPE lub P w trakcie gry. Zatrzymuje ono rozgrywkę
@@ -159,7 +131,6 @@ class Window:
         uruchamia funkcję game.run(game), która odpowiada za wyświetlenie menu głownego i uruchomienie pętli głównej
         programu. 'Exit' kończy pracę programu. Powrót do rozgrywki możliwy jest również przy użyciu tych samych
         klawiszy które słuszą do wywołania menu."""
-        x, y = 0, 0  # współrzedne kursora myszy
         self.surface.fill(constants.COLOR_PAUSE_MENU)  # koloruje tło menu
         window.print_headline("pause", constants.COLOR_PAUSE_MENU_HEADLINE)  # wypisuje nagłówek menu
 
@@ -179,23 +150,16 @@ class Window:
         while True:
             print("pause")
 
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:  # wciśnięto krzyżyk w prawym-górnym rogu ekranu
-                    pygame.quit()
-                    exit(0)
-                if event.type == pygame.MOUSEMOTION:  # mysz się porusza
-                    x, y = event.pos  # zapisuje aktualne współrzędne kursora
-                if event.type == pygame.KEYDOWN:  # wciśnięto klawisz na klawiaturze
-                    if event.key == pygame.K_ESCAPE or event.key == pygame.K_p:  # ESCAPE lub P
-                        return
-                if event.type == pygame.MOUSEBUTTONDOWN:  # wciśnięto klawisz myszy
-                    if event.button == 1 and continue_button.rect.collidepoint(x, y):  # LPM i 'continue'
-                        return
-                    if event.button == 1 and main_menu.rect.collidepoint(x, y):  # LPM i 'main menu'
-                        game.run(game)
-                    if event.button == 1 and close.rect.collidepoint(x, y):  # LPM i 'exit'
-                        pygame.quit()
-                        exit(0)
+            # zwraca nr naciśniętego przycisku
+            button_number = check_which_button((continue_button, main_menu, close), (pygame.K_ESCAPE, pygame.K_p))
+            if button_number == 1 or button_number == 0:  # LPM i 'continue' lub klawisz 'ESCAPE' lub 'p'
+                return  # wraca do gry
+            elif button_number == 2:  # LPM i 'main menu'
+                game.reset()  # resetuje stan gry
+                game.run(game)  # uruchamia grę od początku
+            elif button_number == 3:  # LPM i 'exit'
+                pygame.quit()
+                exit(0)
 
     def win_menu(self, window, game):
         """Wyświetla menu zwycięstwa po zbiciu wszystkich klocków z planszy. Składa się z przycisków: 'main menu',
@@ -220,21 +184,12 @@ class Window:
             while True:
                 print("win menu")
 
-                for event in pygame.event.get():
-                    if event.type == pygame.QUIT:  # wciśnięto krzyżyk w prawym-górnym rogu ekranu
-                        pygame.quit()
-                        exit(0)
-                    if event.type == pygame.MOUSEMOTION:  # mysz się porusza
-                        x, y = event.pos  # zapisuje aktualne współrzędne kursora
-                    if event.type == pygame.KEYDOWN:  # wciśnięto klawisz na klawiaturze
-                        if event.key == pygame.K_ESCAPE or event.key == pygame.K_p:  # ESCAPE lub P
-                            return
-                    if event.type == pygame.MOUSEBUTTONDOWN:  # wciśnięto klawisz myszy
-                        if event.button == 1 and main_menu.rect.collidepoint(x, y):  # LPM i 'main menu'
-                            game.run(game)
-                        if event.button == 1 and close.rect.collidepoint(x, y):  # LPM i 'exit'
-                            pygame.quit()
-                            exit(0)
+                button_number = check_which_button((main_menu, close))  # zwraca nr naciśniętego przycisku
+                if button_number == 1:  # LPM i 'main menu'
+                    game.run(game)
+                elif button_number == 2:  # LPM i 'exit'
+                    pygame.quit()
+                    exit(0)
 
     def print_headline(self, text, color):
         """Funkcja pomocnicza do pisania nagłówku w menu"""
@@ -242,3 +197,26 @@ class Window:
         headline_rect = headline_obj.get_rect()
         headline_rect.center = (self.width / 2, 30)
         self.surface.blit(headline_obj, headline_rect)
+
+
+def check_which_button(buttons, keys=None):
+    """Zwraca numer wybranego przez użytkownika przycisku z listy otrzymanych jako argumenty"""
+    x, y = 0, 0  # współrzedne kursora myszy
+    while True:
+        print("buttons check")
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:  # wciśnięto krzyżyk w prawym-górnym rogu okna programu
+                pygame.quit()
+                exit(0)
+            if event.type == pygame.MOUSEMOTION:  # mysz się porusza
+                x, y = event.pos  # zapisuje aktualne współrzędne kursora
+            if event.type == pygame.KEYDOWN:  # wciśnięto klawisz na klawiaturze
+                for key in keys:
+                    if event.key == key:  # ESCAPE lub P
+                        return 0  # zwraca 0 (wciśnięto żądany przycisk)
+            if event.type == pygame.MOUSEBUTTONDOWN:  # klawisz myszy wciśnięty
+                button_number = 1
+                for button in buttons:
+                    if event.button == 1 and button.rect.collidepoint(x, y):  # LPM i kursor nad przyciskiem
+                        return button_number  # zwraca numer przycisku
+                    button_number += 1
