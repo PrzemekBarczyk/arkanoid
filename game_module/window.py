@@ -1,4 +1,4 @@
-"""Klasa okna programu z metodami rysowania różnych menu"""
+"""Moduł zawierający klasę okna i funkcję sprawdzającą który przycisk został wybrany przez użytkownika"""
 
 import pygame
 from game_module import constants
@@ -6,11 +6,13 @@ from game_module import buttons
 
 
 class Window:
-    """Klasa odpowiadająca za okno programu i wyświetlanie na ekranie menu.
+    """Klasa okna:
+
+    Odpowiada za okno programu i wyświetlanie odpowiedniego menu.
     Zmienna surface wymagana przy rysowaniu innych obiektów w okienku programu"""
 
     def __init__(self):
-        """Tworzy okienko programu o podanych rozmiarach"""
+        """Konstruktor tworzy okienko programu o podanych rozmiarach"""
         self.width = constants.WINDOW_WIDTH
         self.height = constants.WINDOW_HEIGHT
 
@@ -19,12 +21,16 @@ class Window:
 
     def draw(self):
         """Wypełnia 'powierzchnie' kolorem"""
+
         self.surface.fill(constants.COLOR_BACKGROUND)
 
     def main_menu(self, window):
-        """Tworzy główne menu gry i pozwala wybrać przy użyciu myszy jedną z opcji: 'start', 'options', 'exit'.
+        """Tworzy główne menu gry:
+
+        Użytkownik może wybrać przy użyciu myszy jedną z opcji: 'start', 'options', 'exit'.
         'Start' kończy działanie funkcji po czym program przechodzi do wykonywania funkcji znajdujących się w
-        głównej pętli programu. 'Options' wywołuje funkcję odpowiedzialną za wyświetlenie menu z opcjami.
+        głównej pętli programu.
+        'Options' wywołuje funkcję odpowiedzialną za wyświetlenie menu z opcjami.
         'Exit' dezaktywuje bibliotekę pygame, po czym kończy pracę programu funkcją exit(0)"""
 
         while True:
@@ -55,10 +61,13 @@ class Window:
                 exit(0)
 
     def options_menu(self, window):
-        """Tworzy menu z opcjami: 'difficulty' i 'background color'. Użytkownik może je zmieniać przy użyciu LPM.
-        Pod opcjami znajduje się przycisk 'return' który kończy działanie tej funkcji i wraca do miejsca
-        wywołania - funkcji main_menu(). Ten sam efekt powrotu do poprzedniego menu można uzyskać przy użyciu
+        """Tworzy menu z opcjami:
+
+        Do wyboru są opcje: 'difficulty' i 'background color'. Użytkownik może zmieniać opcję przy użyciu lewego
+        przycisku myszy. Pod opcjami znajduje się przycisk 'return' który kończy działanie tej funkcji i wraca do
+        miejsca wywołania - funkcji main_menu(). Ten sam efekt powrotu do poprzedniego menu można uzyskać przy użyciu
         klawisza ESCAPE"""
+
         self.surface.fill(constants.COLOR_MENU)  # koloruje tło menu
         window.print_headline("Settings", constants.COLOR_MENU_HEADLINE)  # wypisuje nagłówek menu
 
@@ -89,13 +98,18 @@ class Window:
                 return  # wróć do menu głównego
 
     def game_over_menu(self, window, game):
-        """Tworzy menu końca gry. Uruchamia się pod tym jak piłka wypadnie poza dół okienka programu i resetuje
-        stan gry (lokalizację piłki, ilość zbitych klocków). Użytkownik może wybrać czy chce kontynuować gre
-        'try again', wrócić do menu głównego 'main menu' czy zakończyć gre 'exit'. Wybranie 'try again' kończy
-        działanie funkcji i wraca do głównej pętli programu która kontynuuje działanie ze zresetowanym stanem gry.
+        """Tworzy menu końca gry.
+
+        Menu uruchamia się pod tym jak piłka wypadnie poza dół okienka programu i resetuje stan gry
+        (lokalizację piłki, ilość zbitych klocków). Użytkownik może wybrać czy chce kontynuować gre 'try again',
+        wrócić do menu głównego 'main menu' czy zakończyć gre 'exit'.
+        Wybranie 'try again' kończy działanie funkcji i wraca do głównej pętli programu która kontynuuje działanie
+        ze zresetowanym stanem gry.
         Opcja 'main menu' uruchamia funkcje game.run(game), która uruchamia menu główne następnie główną petlę
-        programu. 'Exit' kończy pracę programu. Opcje możliwe są do wyboru przy użyciu LPM, ponadto klawisz ESCAPE
-        odpowiada za wybranie opcji 'exit'."""
+        programu.
+        'Exit' kończy pracę programu. Opcje możliwe są do wyboru przy użyciu lewego przycisku myszy, ponadto klawisz
+        ESCAPE odpowiada za wybranie opcji 'exit'."""
+
         game.reset()  # resetuje stan gry
         self.surface.fill(constants.COLOR_GAME_OVER_MENU)  # koloruje tło menu
         window.print_headline("GAME OVER", constants.COLOR_GAME_OVER_MENU_HEADLINE)  # wypisuje nagłówek menu
@@ -125,12 +139,17 @@ class Window:
                 exit(0)
 
     def pause_menu(self, window, game):
-        """Tworzy menu pauzy które można wywołać klawiszem ESCAPE lub P w trakcie gry. Zatrzymuje ono rozgrywkę
-        i wyświetla ekran menu z którego można wybrać: 'continue', 'main menu' i 'exit'. Opcja 'continue' pozwala
-        kontynuować rozgrywkę z niezmienionym stanem rozgrywki (położenie piłki, liczba zbitych klocków). 'Main menu'
-        uruchamia funkcję game.run(game), która odpowiada za wyświetlenie menu głownego i uruchomienie pętli głównej
-        programu. 'Exit' kończy pracę programu. Powrót do rozgrywki możliwy jest również przy użyciu tych samych
+        """Tworzy menu pauzy:
+
+        Menu można wywołać klawiszem ESCAPE lub P w trakcie gry. Zatrzymuje ono rozgrywkę i wyświetla ekran menu
+        z którego można wybrać: 'continue', 'main menu' i 'exit'.
+        Opcja 'continue' pozwala kontynuować rozgrywkę z niezmienionym stanem rozgrywki (położenie piłki,
+        liczba zbitych klocków).
+        'Main menu' uruchamia funkcję game.run(game), która odpowiada za wyświetlenie menu głownego i uruchomienie
+        pętli głównej programu.
+        'Exit' kończy pracę programu. Powrót do rozgrywki możliwy jest również przy użyciu tych samych
         klawiszy które słuszą do wywołania menu."""
+
         self.surface.fill(constants.COLOR_PAUSE_MENU)  # koloruje tło menu
         window.print_headline("pause", constants.COLOR_PAUSE_MENU_HEADLINE)  # wypisuje nagłówek menu
 
@@ -162,9 +181,12 @@ class Window:
                 exit(0)
 
     def win_menu(self, window, game):
-        """Wyświetla menu zwycięstwa po zbiciu wszystkich klocków z planszy. Składa się z przycisków: 'main menu',
+        """Wyświetla menu zwycięstwa
+
+        Pojawia się po zbiciu wszystkich klocków z planszy. Składa się z przycisków: 'main menu',
         które przenosi do menu głównego poprzez wywołanie funkcji game.run(game), oraz 'exit' który kończy pracę
         programu."""
+
         x, y = 0, 0  # współrzędne kursora myszy
         while True:
             self.surface.fill(constants.COLOR_WIN_MENU)  # koloruje tło menu
@@ -193,6 +215,7 @@ class Window:
 
     def print_headline(self, text, color):
         """Funkcja pomocnicza do pisania nagłówku w menu"""
+
         headline_obj = constants.FONT_HEADINGS.render(text, True, color)
         headline_rect = headline_obj.get_rect()
         headline_rect.center = (self.width / 2, 30)
@@ -201,6 +224,7 @@ class Window:
 
 def check_which_button(buttons, keys=None):
     """Zwraca numer wybranego przez użytkownika przycisku z listy otrzymanych jako argumenty"""
+
     x, y = 0, 0  # współrzedne kursora myszy
     while True:
         print("buttons check")

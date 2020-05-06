@@ -1,11 +1,13 @@
-"""Klasa sędziego gry - w budowie"""
+"""Moduł zwierający klasę sędziego gry - w budowie"""
 
 # import pygame
 # from game_module import constants
 #
 #
 # class Judge:
-#     """Sędzia gry - liczy ilość śmierci gracza oraz wyświetla informacje w oknie"""
+#     """Klasa sędziego gry:
+#
+#     Liczy ilość śmierci gracza oraz wyświetla informacje w oknie"""
 #
 #     def __init__(self, Window, Ball, Racket):
 #         self.ball = Ball

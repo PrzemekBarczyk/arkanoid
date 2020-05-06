@@ -1,17 +1,18 @@
-"""Klasa przycisków"""
+"""Moduł zawierający klase przycisków"""
 
 import pygame
 from game_module import constants
-from game_module import window
 
 
 class Button:
-    """Klasa zawierające przyciski z menu, które gracz może wybrać przy użyciu kursora myszki
-    zaznaczając ich pole i klikając LPM"""
+    """Klasa przycisków z menu:
+
+    Przyciski mogą być wybrane przez gracza przy użyciu myszy poprzez naprowadzenie kursora na ich polę i
+    wciśnięcie lewego przycisku myszy"""
 
     def __init__(self, name, x, y, width=constants.BUTTON_WIDTH, height=constants.BUTTON_HEIGHT,
                  button_color=constants.COLOR_BUTTON, text_color=constants.COLOR_BUTTON_TEXT):
-        """Kontruktor"""
+        """Konstruktor inicjalizuje zminne i tworzy powierzchnie klocka"""
         self.name = name
         self.x = x
         self.y = y
@@ -20,6 +21,7 @@ class Button:
         self.button_color = button_color
         self.text_color = text_color
 
+        # utworzenie powierzchni obiektu i ustawienie w odpowiedniej pozycji
         self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
 
     def draw(self, window):
