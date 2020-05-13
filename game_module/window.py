@@ -86,7 +86,8 @@ class Window:
 
         while True:
             print("settings menu")
-            button_number = check_which_button((difficulty, background_color, return_main_menu))  # zwraca nr naciśniętego przycisku
+            # zwraca nr naciśniętego przycisku
+            button_number = check_which_button((difficulty, background_color, return_main_menu))
             if button_number == 1:  # LPM i kursor nad 'difficulty'
                 pass
                 # TODO: rozbudować
