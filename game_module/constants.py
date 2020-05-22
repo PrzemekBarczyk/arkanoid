@@ -37,11 +37,11 @@ COLOR_BLOCK = (34, 105, 125)  # niebieski
 # Prędkość poruszania piłki
 BALL_SPEED = 3
 # Wymiary piłki
-BALL_WIDTH = 10
-BALL_HEIGHT = 10
+BALL_WIDTH = 15
+BALL_HEIGHT = 15
 # Początkowe współrzędne piłki
 BALL_START_X = 50
-BALL_START_Y = 50
+BALL_START_Y = 70
 
 # Racket-----------------------------------------
 RACKET_WIDTH = 80
@@ -50,8 +50,8 @@ RACKET_X = WINDOW_WIDTH/2 - RACKET_WIDTH/2
 RACKET_Y = WINDOW_HEIGHT-40
 
 # Block------------------------------------------
-BLOCK_WIDTH = 60
-BLOCK_HEIGHT = 20
+BLOCK_WIDTH = 100
+BLOCK_HEIGHT = 15
 BLOCK_X = 10
 BLOCK_Y = 10
 
@@ -66,6 +66,8 @@ BUTTON_WIDTH = 250
 BUTTON_HEIGHT = 80
 
 # Judge------------------------------------------
+LIFES_X = 20
+LIFES_Y = 65
 
 # Time-------------------------------------------
 FPS_LIMIT = 250

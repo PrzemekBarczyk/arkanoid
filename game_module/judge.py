@@ -27,5 +27,5 @@ class Judge:
         text = "Lifes: " + str(self.lifes)
         text_obj = constants.FONT_OPTIONS.render(text, True, (0, 0, 0))
         text_rect = text_obj.get_rect()
-        text_rect.topleft = (20, 60)
+        text_rect.topleft = (constants.LIFES_X, constants.LIFES_Y)
         window.surface.blit(text_obj, text_rect)
