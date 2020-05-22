@@ -1,6 +1,7 @@
 """Moduł zawierający klase rakietki"""
 
 import pygame
+
 from game_module import constants
 
 
@@ -14,15 +15,15 @@ class Racket:
 
         self.width = constants.RACKET_WIDTH
         self.height = constants.RACKET_HEIGHT
-        self.x_cord = constants.WINDOW_WIDTH/2 - constants.RACKET_WIDTH/2
-        self.y_cord = constants.WINDOW_HEIGHT-40
+        self.x_cord = constants.RACKET_X
+        self.y_cord = constants.RACKET_Y
         self.color = constants.COLOR_RACKET
 
         # konfiguruje kształt rakietki
         self.surface = pygame.Surface([self.width, self.height])  # utworzenie powierzchni obiektu
         self.surface.fill(self.color)  # pokolorowanie powierzchni
         # ustawienie prostokąta zawierającego obiekt w początkowej pozycji
-        self.rect = self.surface.get_rect(x=self.x_cord, y=self.y_cord)
+        self.rect = self.surface.get_rect(x=int(self.x_cord), y=int(self.y_cord))
 
     def move(self, x_cord):
         """Przesuwa rakietkę o wyznaczone miejsce"""

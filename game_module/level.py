@@ -1,7 +1,7 @@
 """Moduł zawierający klasę poziomu gry"""
 
-from game_module import constants
 from game_module import block
+from game_module import constants
 
 
 class Level:

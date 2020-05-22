@@ -1,7 +1,11 @@
 """Wszystkie stałe występujące w programie"""
 
 import pygame
-pygame.init()
+pygame.init()  # konieczne dla fontów
+
+# Window-----------------------------------------
+WINDOW_WIDTH = 1240
+WINDOW_HEIGHT = 700
 
 # Fonts------------------------------------------
 FONT_HEADINGS = pygame.font.SysFont(None, 60) # czcionka nagłówków
@@ -31,7 +35,7 @@ COLOR_BLOCK = (34, 105, 125)  # niebieski
 
 # Ball-------------------------------------------
 # Prędkość poruszania piłki
-BALL_SPEED = 4
+BALL_SPEED = 3
 # Wymiary piłki
 BALL_WIDTH = 10
 BALL_HEIGHT = 10
@@ -42,8 +46,8 @@ BALL_START_Y = 50
 # Racket-----------------------------------------
 RACKET_WIDTH = 80
 RACKET_HEIGHT = 16
-RACKET_X = RACKET_WIDTH/2 - 40
-RACKET_Y = RACKET_HEIGHT - 40
+RACKET_X = WINDOW_WIDTH/2 - RACKET_WIDTH/2
+RACKET_Y = WINDOW_HEIGHT-40
 
 # Block------------------------------------------
 BLOCK_WIDTH = 60
@@ -51,12 +55,7 @@ BLOCK_HEIGHT = 20
 BLOCK_X = 10
 BLOCK_Y = 10
 
-# Window-----------------------------------------
-WINDOW_WIDTH = 800
-WINDOW_HEIGHT = 600
-
 # Main menu--------------------------------------
-
 
 # Options menu-----------------------------------
 
@@ -67,7 +66,6 @@ BUTTON_WIDTH = 250
 BUTTON_HEIGHT = 80
 
 # Judge------------------------------------------
-FONT_SIZE = 32  # 64
 
 # Time-------------------------------------------
-FPS_LIMIT = 120
+FPS_LIMIT = 250

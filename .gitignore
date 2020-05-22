@@ -1,4 +1,4 @@
 # Project exclude paths
-/venv/
+/venv
 /.idea
 /game_module/__pycache__
