@@ -4,8 +4,8 @@ import pygame
 pygame.init()  # konieczne dla fontów
 
 # Window-----------------------------------------
-WINDOW_WIDTH = 1240
-WINDOW_HEIGHT = 700
+WINDOW_WIDTH = 800
+WINDOW_HEIGHT = 600
 
 # Fonts------------------------------------------
 FONT_HEADINGS = pygame.font.SysFont(None, 60) # czcionka nagłówków
@@ -56,6 +56,8 @@ BLOCK_HEIGHT = 25
 # Main menu--------------------------------------
 
 # Options menu-----------------------------------
+RESOLUTIONS = [(800, 600), (1200, 900)]
+FULLSCREEN = [0, pygame.FULLSCREEN]
 
 # Game over menu---------------------------------
 
@@ -63,9 +65,15 @@ BLOCK_HEIGHT = 25
 BUTTON_WIDTH = 250
 BUTTON_HEIGHT = 80
 
+MAIN_MENU_BUTTONS_NAMES = ["start", "options", "exit"]
+SETTINGS_MENU_BUTTONS_NAMES = ["difficulty", "resolution", "fullscreen", "main menu"]
+GAME_OVER_MENU_BUTTONS_NAMES = ["try again", "main menu", "exit"]
+PAUSE_MENU_BUTTONS_NAMES = ["continue", "main menu", "exit"]
+WIN_MENU_BUTTONS_NAMES = ["main menu", "exit"]
+
 # Judge------------------------------------------
 LIFES_X = 20
 LIFES_Y = 65
 
 # Time-------------------------------------------
-FPS_LIMIT = 250
+FPS_LIMIT = 300

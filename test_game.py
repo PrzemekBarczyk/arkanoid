@@ -11,6 +11,7 @@ from game_module import racket
 
 
 class TestGame(unittest.TestCase):
+    """Testy klasy Game"""
 
     def setUp(self):
         """Uruchamia się przed wykonaniem każdego z testów"""
@@ -29,17 +30,23 @@ class TestGame(unittest.TestCase):
         self.assertIsInstance(self.game.level, level.Level)
 
     def test_run(self):
+        """Test działania funkcji run()"""
         self.game.run()
 
     def test_handle_events(self):
+        """Test działania funkcji handle_events()"""
         self.game.handle_events()
 
     def test_reset(self):
+        """Test działania funkcji reset()"""
         self.game.reset()
 
 
 class TestElse(unittest.TestCase):
+    """Testy pozostałych funkcji"""
+
     def test_main(self):
+        """Test działania funkcji main()"""
         pass
 
 

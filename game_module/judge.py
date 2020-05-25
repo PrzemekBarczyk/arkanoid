@@ -11,11 +11,12 @@ class Judge:
     def __init__(self):
         self.lifes = 3
 
-    def remove_life(self, window, game, ball):
+    def remove_life(self, window, game, ball, game_over_menu):
         """Usuwa jedno życie i sprawdza ile zostało"""
         self.lifes -= 1
         if self.lifes <= 0:
-            window.game_over_menu(window, game)
+            game_over_menu.draw(window)
+            game_over_menu.run(game)
         else:
             ball.reset()
 

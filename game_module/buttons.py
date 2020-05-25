@@ -11,7 +11,8 @@ class Button:
     Przyciski mogą być wybrane przez gracza przy użyciu myszy poprzez naprowadzenie kursora na ich
     polę i wciśnięcie lewego przycisku myszy"""
 
-    def __init__(self, name, x, y, width=constants.BUTTON_WIDTH, height=constants.BUTTON_HEIGHT,
+    def __init__(self, name, x=constants.WINDOW_WIDTH / 2 - constants.BUTTON_WIDTH / 2, y=0,
+                 width=constants.BUTTON_WIDTH, height=constants.BUTTON_HEIGHT,
                  button_color=constants.COLOR_BUTTON, text_color=constants.COLOR_BUTTON_TEXT):
         """Konstruktor inicjalizuje zminne i tworzy powierzchnie klocka"""
         self.name = name

@@ -7,6 +7,7 @@ Opisy wprowadzonych zmian w zależności od wersji:
 - v0.4 - zmodyfikowano plik judge.py i dodano pętle for z enumerate() w windows.py zgodnie z Uwagami. Dodano poprawki na postawie Uwag drobiazgowych z pliku README.md. Utworzono plik na testy modułu game(na razie tylko szablon).
 - v0.5 - poprawiono rozmiary niektórych elementów (klocków, piłki, okna gry)
 - v0.6 - poprawiono zachowanie piłki po kolizji z klockami, rozbudowano szablony testów
+- v0.7 - zmieniono implementację kodu odpowiedzialnego za menu w grze (stworzono odzielną klasę)
 
 Required_elements branch: gałąź z implementacjami wymaganych elementów do projektu
 

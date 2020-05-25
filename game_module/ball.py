@@ -54,7 +54,7 @@ class Ball:
         # modyfikuje kierunek uwzględniając punkt paletki od którego odbiła się piłka
         self.direction += side
 
-    def move(self, racket, bricks: list, window, game, judge):
+    def move(self, racket, bricks: list, window, game, judge, game_over_menu, win_menu):
         """Przesuwa piłkę i wykrywa kolizje
 
         Piłka jest przesuwana o wartość wektora prędkości. W przypadku wykrycia kolizji zmieniany
@@ -88,7 +88,7 @@ class Ball:
 
         # piłka wykracza poza okno gry z dołu
         elif self.rect.y > constants.WINDOW_HEIGHT:
-            judge.remove_life(window, game, self)
+            judge.remove_life(window, game, self, game_over_menu)
 
         # sprawdza czy nastąpiła kolizja między piłką a paletką
         elif self.rect.colliderect(racket.rect):
@@ -103,7 +103,8 @@ class Ball:
             if self.rect.colliderect(brick.rect):
                 bricks.remove(brick)  # usuń klocek z listy
                 if len(bricks) == 0:  # wszystkie klocki zbite
-                    window.win_menu(window, game)  # wyświetl odpowiednie menu
+                    win_menu.draw(window)  # wyświetl odpowiednie menu
+                    win_menu.run(game)
                 elif brick.rect.y <= self.rect.y <= brick.rect.y + brick.height - self.height:  # bok klocka
                     self.direction = (360 - self.direction) % 360
                 else:  # dół lub góra klocka
