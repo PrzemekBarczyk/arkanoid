@@ -25,6 +25,8 @@ class Game:
         self.judge = judge.Judge()  # tworzy sędziego gry
         self.level = level.Level()  # tworzy bloki w pewnej konfiguracji
 
+        self.menu_id = 1  # zmienna określająca które menu zostanie wyświetlone
+
         # tworzenie menusów
         self.main_menu = menus.MainMenu("main menu", constants.MAIN_MENU_BUTTONS_NAMES)
         self.settings_menu = menus.SettingsMenu("setting menu", constants.SETTINGS_MENU_BUTTONS_NAMES)
@@ -36,26 +38,43 @@ class Game:
         self.win_menu = menus.WinMenu("win menu", constants.WIN_MENU_BUTTONS_NAMES, constants.COLOR_WIN_MENU,
                                       constants.COLOR_WIN_MENU_HEADLINE)
 
-    def menu(self):
-        """Główne menu:
+    def check_which_menu(self):
+        """Uruchamia odpowienie menu na podstawie wartości zmiennej menu_id."""
 
-        Wyświetla główne menu gry z którego użytkownik może przejść do głównej
-        pętli programu, menu opcji lub zakończyć program."""
+        while self.menu_id > 0:  # póki nie zwrócono odpowiedniej wartości
+            if self.menu_id == 1:  # main menu
+                self.main_menu.draw(self.window)  # rysuje menu główne
+                self.menu_id = self.main_menu.run(self.window, self, self.settings_menu)  # czeka na wybór opcji
 
-        self.main_menu.draw(self.window)  # rysuje menu główne
-        self.main_menu.run(self.window, self, self.settings_menu)  # czeka na wybór opcji
+            elif self.menu_id == 2:  # settings menu
+                self.settings_menu.draw(self.window)
+                self.menu_id = self.settings_menu.run(self.window)
+
+            elif self.menu_id == 3:  # game over menu
+                self.game_over_menu.draw(self.window)
+                self.menu_id = self.game_over_menu.run(self)
+
+            elif self.menu_id == 4:  # pause menu
+                self.pause_menu.draw(self.window)
+                self.menu_id = self.pause_menu.run(self)
+
+            elif self.menu_id == 5:  # win menu
+                self.win_menu.draw(self.window)
+                self.menu_id = self.win_menu.run(self)
 
     def run(self):
         """Główna pętla progamu:
 
-        Na początku wywoływana jest funkcja main_menu() (moduł windows) która odpowiada za
-        wyświetlenie na ekranie głównego menu gry. Po wybraniu opcji 'start' funkcja kończy
-        swoje działanie i program przechodzi do wykonywania nieskończonej głównej pętli programu,
-        która odpowiada za kontrolowanie stanu gry i jego bieżącą aktualizację. Wyjście z
-        głównej pętli jest możliwe w przypadku naciśnięcia przycisku 'exit' lub wyłączenia
-        programu za pomocą krzyżyka w prawym górnym rogu ekranu."""
+        Uruchamiana jest główna pętla programu, która odpowiada za kontrolowanie stanu gry
+        i jego bieżącą aktualizację. Wyjście z głównej pętli jest możliwe w przypadku
+        wyłączenia programu za pomocą krzyżyka w prawym górnym rogu ekranu. Klawisze
+        'ESCAPE' oraz 'P' uruchamiają pauze w grze."""
 
         while not self.handle_events():  # działa do momentu otrzymania sygnału wyjścia
+
+            # sprawdzenie czy należy uruchomić któreś menu
+            self.check_which_menu()
+
             # wyznaczenie przemieszczenia piłki
             self.ball.move(self.player, self.level.blocks, self.window, self, self.judge, self.game_over_menu,
                            self.win_menu)
@@ -80,8 +99,7 @@ class Game:
                 return True
             if event.type == pygame.KEYDOWN:  # wciśnięto klawisz na klawiaturze
                 if event.key == pygame.K_ESCAPE or pygame.K_p:  # ESCAPE lub P
-                    self.pause_menu.draw(self.window)
-                    self.pause_menu.run(self)
+                    self.menu_id = 4  # uruchom pause menu
             if event.type == pygame.MOUSEMOTION:  # poruszono myszą
                 xy_cord = event.pos  # pobiera aktualne współrzędne kursora
                 self.player.move(xy_cord[0])
@@ -112,10 +130,13 @@ def main():
 
     # wywołanie metody wprawiającej obiekty w ruch
     try:
-        game.menu()
+        game.run()
 
     except SystemExit:
         print("Złapano SystemExit")
+    except:
+        print("Nieznany wyjątek!")
+        raise
 
 
 if __name__ == "__main__":

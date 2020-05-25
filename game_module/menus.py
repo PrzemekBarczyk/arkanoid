@@ -1,5 +1,7 @@
 """Moduł zawierający klasę menusów"""
 
+# TODO: przejrzeć na spokojnie, uzupełnić docstringi, rozbudować menu z opcjami
+
 import sys
 
 import pygame
@@ -31,7 +33,7 @@ class Menu:
         """Rysuje odpowiednie menu"""
 
         window.surface.fill(self.background_color)  # koloruje tło menu
-        self.print_headline(window, self.name, self.headline_color)  # nagłówek menu
+        print_headline(window, self.name, self.headline_color)  # nagłówek menu
 
         for button in self.buttons_objects:  # rysuje przyciski
             button.draw(window)
@@ -70,14 +72,6 @@ class Menu:
     #     które przenosi do menu głównego poprzez wywołanie funkcji game.run(game), oraz 'exit'
     #     który kończy pracę programu."""
 
-    def print_headline(self, window, text, color):
-        """Funkcja pomocnicza do pisania nagłówku w menu"""
-
-        headline_obj = constants.FONT_HEADINGS.render(text, True, color)
-        headline_rect = headline_obj.get_rect()
-        headline_rect.center = (window.width // 2, 30)
-        window.surface.blit(headline_obj, headline_rect)
-
 
 class MainMenu(Menu):
     def __init__(self, name, buttons_names, background_color=constants.COLOR_MENU,
@@ -87,13 +81,13 @@ class MainMenu(Menu):
     def run(self, window, game, settings_menu):
         """Czeka na wybór opcji przez użytkownika."""
 
+        print("main menu")
         while True:
             button_number = check_which_button(self.buttons_objects)
             if button_number == 1:  # przycisk 'start'
-                game.run()  # uruchamia główną pętlę programu
+                return 0
             elif button_number == 2:  # przycisk 'options'
-                settings_menu.draw(window)  # uruchamia menu opcji
-                settings_menu.run(window)
+                return 2
             elif button_number == 3:  # przycisk 'close'
                 pygame.quit()
                 sys.exit(0)
@@ -127,7 +121,7 @@ class SettingsMenu(Menu):
                 break
                 # TODO: włączony/wyłączony
             elif button_number == 4:  # lewy przycisk myszy i kursor nad 'return'
-                return  # wróć do menu głównego
+                return 1 # wróć do menu głównego
 
 
 class GameOverMenu(Menu):
@@ -136,17 +130,18 @@ class GameOverMenu(Menu):
 
     def run(self, game):
         game.reset()  # resetuje stan gry
+        print("game over menu")
         while True:
-            print("game over")
             # zwraca nr naciśniętego przycisku
             button_number = check_which_button(self.buttons_objects)
             if button_number == 1:  # lewy przycisk myszy i 'try again'
-                return
+                return 0
             elif button_number == 2:  # lewy przycisk myszy i 'main menu'
-                game.run()
+                game.reset()
+                return 1
             elif button_number == 3:  # lewy przycisk myszy i 'exit'
                 pygame.quit()
-                exit(0)
+                sys.exit(0)
 
 
 class PauseMenu(Menu):
@@ -154,20 +149,19 @@ class PauseMenu(Menu):
         super().__init__(name, buttons_names, background_color, headline_color)
 
     def run(self, game):
+        print("pause menu")
         while True:
-            print("pause")
-
             # zwraca nr naciśniętego przycisku
             button_number = check_which_button(self.buttons_objects, (pygame.K_ESCAPE, pygame.K_p))
             # lewy przycisk myszy i 'continue' lub klawisz 'ESCAPE' lub 'p'
             if button_number == 1 or button_number == 0:
-                return  # wraca do gry
+                return 0  # wraca do gry
             elif button_number == 2:  # lewy przycisk myszy i 'main menu'
                 game.reset()  # resetuje stan gry
-                game.menu()  # uruchamia grę od początku
+                return 1  # uruchamia menu główne
             elif button_number == 3:  # lewy przycisk myszy i 'exit'
                 pygame.quit()
-                exit(0)
+                sys.exit(0)
 
 
 class WinMenu(Menu):
@@ -180,16 +174,25 @@ class WinMenu(Menu):
             button_number = check_which_button(self.buttons_objects)  # zwraca nr naciśniętego przycisku
             if button_number == 1:  # lewy przycisk myszy i 'main menu'
                 game.reset()
-                game.menu()
+                return 1
             elif button_number == 2:  # lewy przycisk myszy i 'exit'
                 pygame.quit()
-                exit(0)
+                sys.exit(0)
 
 
 def enumerate_with_step(xs, start=0, step=1):
     for x in xs:
         yield start, x
         start += step
+
+
+def print_headline(window, text, color):
+    """Funkcja pomocnicza do pisania nagłówku w menu"""
+
+    headline_obj = constants.FONT_HEADINGS.render(text, True, color)
+    headline_rect = headline_obj.get_rect()
+    headline_rect.center = (window.width // 2, 30)
+    window.surface.blit(headline_obj, headline_rect)
 
 
 def check_which_button(buttons, keys=None):
@@ -201,7 +204,7 @@ def check_which_button(buttons, keys=None):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:  # wciśnięto krzyżyk w prawym-górnym rogu okna programu
                 pygame.quit()
-                exit(0)
+                sys.exit(0)
             if event.type == pygame.MOUSEMOTION:  # mysz się porusza
                 x, y = event.pos  # zapisuje aktualne współrzędne kursora
             if event.type == pygame.KEYDOWN:  # wciśnięto klawisz na klawiaturze
@@ -212,4 +215,4 @@ def check_which_button(buttons, keys=None):
                 for button in enumerate(buttons):
                     # lewy przycisk myszy i kursor nad przyciskiem
                     if event.button == 1 and button[1].rect.collidepoint(x, y):
-                        return button[0]+1  # zwraca numer przycisku
+                        return button[0] + 1  # zwraca numer przycisku
