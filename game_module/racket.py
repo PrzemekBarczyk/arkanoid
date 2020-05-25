@@ -39,7 +39,7 @@ class Racket:
             x_cord_new = 0
 
         # aktualizuje położenie paletki w poziomie
-        self.rect.x = x_cord_new
+        self.rect.x = round(x_cord_new)
 
     def draw(self, window):
         """Rysuje piłkę w oknie"""

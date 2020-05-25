@@ -41,7 +41,7 @@ BALL_WIDTH = 15
 BALL_HEIGHT = 15
 # Początkowe współrzędne piłki
 BALL_START_X = 50
-BALL_START_Y = 70
+BALL_START_Y = 100
 
 # Racket-----------------------------------------
 RACKET_WIDTH = 80
@@ -51,9 +51,7 @@ RACKET_Y = WINDOW_HEIGHT-40
 
 # Block------------------------------------------
 BLOCK_WIDTH = 100
-BLOCK_HEIGHT = 15
-BLOCK_X = 10
-BLOCK_Y = 10
+BLOCK_HEIGHT = 25
 
 # Main menu--------------------------------------
 

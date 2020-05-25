@@ -145,7 +145,7 @@ class Window:
             if button_number == 1:  # lewy przycisk myszy i 'try again'
                 return
             elif button_number == 2:  # lewy przycisk myszy i 'main menu'
-                game.run(game)
+                game.run()
             elif button_number == 3:  # lewy przycisk myszy i 'exit'
                 pygame.quit()
                 exit(0)
@@ -192,7 +192,7 @@ class Window:
                 return  # wraca do gry
             elif button_number == 2:  # lewy przycisk myszy i 'main menu'
                 game.reset()  # resetuje stan gry
-                game.run(game)  # uruchamia grę od początku
+                game.run()  # uruchamia grę od początku
             elif button_number == 3:  # lewy przycisk myszy i 'exit'
                 pygame.quit()
                 exit(0)
@@ -238,7 +238,7 @@ class Window:
 
         headline_obj = constants.FONT_HEADINGS.render(text, True, color)
         headline_rect = headline_obj.get_rect()
-        headline_rect.center = (self.width / 2, 30)
+        headline_rect.center = (self.width // 2, 30)
         self.surface.blit(headline_obj, headline_rect)
 
 
@@ -246,8 +246,9 @@ def check_which_button(buttons, keys=None):
     """Zwraca numer wybranego przez użytkownika przycisku z listy otrzymanych jako argumenty"""
 
     x, y = 0, 0  # współrzedne kursora myszy
+    print("buttons check")
     while True:
-        print("buttons check")
+        # print("buttons check")
         for event in pygame.event.get():
             if event.type == pygame.QUIT:  # wciśnięto krzyżyk w prawym-górnym rogu okna programu
                 pygame.quit()

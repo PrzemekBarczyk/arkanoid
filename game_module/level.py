@@ -15,16 +15,16 @@ class Level:
         self.blocks = []  # tworzy listę na bloki
         # tworzy bloki o współrzędnych x i y
         self.blocks = [block.Block(x_cord, y_cord) for x_cord in
-                       range(0, constants.WINDOW_WIDTH, constants.BLOCK_WIDTH + 4) for y_cord in
-                       range(0, 3 * constants.BLOCK_HEIGHT + 4, constants.BLOCK_HEIGHT + 4)]
+                       range(1, constants.WINDOW_WIDTH, constants.BLOCK_WIDTH + 4) for y_cord in
+                       range(1, 3 * constants.BLOCK_HEIGHT, constants.BLOCK_HEIGHT + 4)]
 
     def reset(self):
         """Usuwa listę klocków i tworzy nową"""
 
         self.blocks.clear()
         self.blocks = [block.Block(x_cord, y_cord) for x_cord in
-                       range(0, constants.WINDOW_WIDTH, constants.BLOCK_WIDTH + 4) for y_cord in
-                       range(0, 3 * constants.BLOCK_HEIGHT + 4, constants.BLOCK_HEIGHT + 4)]
+                       range(1, constants.WINDOW_WIDTH, constants.BLOCK_WIDTH + 4) for y_cord in
+                       range(1, 3 * constants.BLOCK_HEIGHT, constants.BLOCK_HEIGHT + 4)]
 
     def draw(self, window):
         """Rysuje klocki w oknie"""

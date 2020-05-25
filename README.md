@@ -6,6 +6,7 @@ Opisy wprowadzonych zmian w zależności od wersji:
 - v0.3 - zapisano bibliotekę zewnętrzną pygame do pliku requirements.txt (punkt 9 Uwag), oraz wprowadzono kolejne poprawki do docstringów zgodnie z punktem 3 (rozbicie opisów na zwięzły opis i dopełnienie, weliminowanie skrótów).
 - v0.4 - zmodyfikowano plik judge.py i dodano pętle for z enumerate() w windows.py zgodnie z Uwagami. Dodano poprawki na postawie Uwag drobiazgowych z pliku README.md. Utworzono plik na testy modułu game(na razie tylko szablon).
 - v0.5 - poprawiono rozmiary niektórych elementów (klocków, piłki, okna gry)
+- v0.6 - poprawiono zachowanie piłki po kolizji z klockami, rozbudowano szablony testów
 
 Required_elements branch: gałąź z implementacjami wymaganych elementów do projektu
 

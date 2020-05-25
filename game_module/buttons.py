@@ -15,8 +15,8 @@ class Button:
                  button_color=constants.COLOR_BUTTON, text_color=constants.COLOR_BUTTON_TEXT):
         """Konstruktor inicjalizuje zminne i tworzy powierzchnie klocka"""
         self.name = name
-        self.x_cord = x
-        self.y_cord = y
+        self.x_cord = int(x)
+        self.y_cord = int(y)
         self.width = width
         self.height = height
         self.button_color = button_color
@@ -31,5 +31,5 @@ class Button:
 
         text_obj = constants.FONT_OPTIONS.render(self.name, True, self.text_color)
         text_rect = text_obj.get_rect()
-        text_rect.center = (self.x_cord + self.width / 2, self.y_cord + self.height / 2)
+        text_rect.center = (self.x_cord + self.width // 2, self.y_cord + self.height // 2)
         window.surface.blit(text_obj, text_rect)

@@ -19,16 +19,16 @@ class Ball:
         """Konstruktor inicjalizuje zmienne i tworzy powierzchnie piłki"""
 
         # wymiary piłki
-        self.width = constants.BALL_WIDTH
-        self.height = constants.BALL_HEIGHT
+        self.width = int(constants.BALL_WIDTH)
+        self.height = int(constants.BALL_HEIGHT)
 
         # początkowe współrzędne piłki
-        self.start_x_cord = constants.BALL_START_X
-        self.start_y_cord = constants.BALL_START_Y
+        self.start_x_cord = int(constants.BALL_START_X)
+        self.start_y_cord = int(constants.BALL_START_Y)
 
         # aktualne współrzędne piłki
-        self.x_cord = self.start_x_cord
-        self.y_cord = self.start_y_cord
+        self.x_cord = int(self.start_x_cord)
+        self.y_cord = int(self.start_y_cord)
 
         self.color = constants.COLOR_BALL
         self.speed = constants.BALL_SPEED  # prędkość poruszania piłki (piksele/tick procesora)
@@ -67,8 +67,8 @@ class Ball:
         self.y_cord -= self.speed * math.cos(direction_radians)
 
         # aktualizuje współrzędne obiektu piłki
-        self.rect.x = self.x_cord
-        self.rect.y = self.y_cord
+        self.rect.x = round(self.x_cord)
+        self.rect.y = round(self.y_cord)
 
         # piłka wykracza poza okno gry z lewej
         if self.rect.x <= 0:
@@ -104,7 +104,11 @@ class Ball:
                 bricks.remove(brick)  # usuń klocek z listy
                 if len(bricks) == 0:  # wszystkie klocki zbite
                     window.win_menu(window, game)  # wyświetl odpowiednie menu
-                self.bounce(0)
+                elif brick.rect.y <= self.rect.y <= brick.rect.y + brick.height - self.height:  # bok klocka
+                    self.direction = (360 - self.direction) % 360
+                else:  # dół lub góra klocka
+                    self.bounce(0)
+                break  # zabezpieczenie przed zbiciem kilku klocków na raz
 
     def draw(self, window):
         """Rysuje piłkę w oknie"""

@@ -24,7 +24,7 @@ class Game:
         self.judge = judge.Judge() # tworzy sędziego gry
         self.level = level.Level()  # tworzy bloki w pewnej konfiguracji
 
-    def run(self, game):
+    def run(self):
         """Główna pętla progamu:
 
         Na początku wywoływana jest funkcja main_menu() (moduł windows) która odpowiada za
@@ -35,9 +35,9 @@ class Game:
         programu za pomocą krzyżyka w prawym górnym rogu ekranu."""
 
         self.window.main_menu(self.window)  # rysuje menu główne i czeka na wybór użytkownika
-        while not self.handle_events(game):  # działa do momentu otrzymania sygnału wyjścia
+        while not self.handle_events():  # działa do momentu otrzymania sygnału wyjścia
             # wyznacza przemieszczenie piłki
-            self.ball.move(self.player, self.level.blocks, self.window, game, self.judge)
+            self.ball.move(self.player, self.level.blocks, self.window, self, self.judge)
 
             # rysowanie obiektów
             self.window.draw()  # rysuje okno
@@ -49,7 +49,7 @@ class Game:
 
             self.fps_clock.tick(constants.FPS_LIMIT)  # ogranicznik liczby klatek na sekundę
 
-    def handle_events(self, game):
+    def handle_events(self):
         """Funkcja obsługująca zdarzenia systemowe."""
 
         for event in pygame.event.get():
@@ -58,7 +58,7 @@ class Game:
                 return True
             if event.type == pygame.KEYDOWN:  # wciśnięto klawisz na klawiaturze
                 if event.key == pygame.K_ESCAPE or pygame.K_p:  # ESCAPE lub P
-                    self.window.pause_menu(self.window, game)
+                    self.window.pause_menu(self.window, self)
             if event.type == pygame.MOUSEMOTION:  # poruszono myszą
                 xy_cord = event.pos  # pobiera aktualne współrzędne kursora
                 self.player.move(xy_cord[0])
@@ -88,7 +88,7 @@ def main():
     game = Game()
 
     # wywołanie metody wprawiającej obiekty w ruch
-    game.run(game)
+    game.run()
 
 
 if __name__ == "__main__":
