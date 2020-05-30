@@ -12,6 +12,7 @@ class Block:
 
     def __init__(self, x, y):
         """Konstruktor inicjalizuje zminne i tworzy powierzchnie klocka"""
+
         self.width = constants.BLOCK_WIDTH
         self.height = constants.BLOCK_HEIGHT
         self.color = constants.COLOR_BLOCK

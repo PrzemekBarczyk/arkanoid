@@ -54,7 +54,7 @@ class Ball:
         # modyfikuje kierunek uwzględniając punkt paletki od którego odbiła się piłka
         self.direction += side
 
-    def move(self, racket, bricks: list, window, game, judge, game_over_menu, win_menu):
+    def move(self, racket, bricks: list, window, game, judge):
         """Przesuwa piłkę i wykrywa kolizje
 
         Piłka jest przesuwana o wartość wektora prędkości. W przypadku wykrycia kolizji zmieniany
@@ -76,10 +76,10 @@ class Ball:
             self.x_cord = 1  # zabezpieczenie przed wypadnięciem piłki poza okno
 
         # piłka wykracza poza okno gry z prawej
-        elif self.rect.x >= constants.WINDOW_WIDTH - self.width:
+        elif self.rect.x >= window.width - self.width:
             self.direction = (360 - self.direction) % 360
             # zabezpieczenie przed wypadnięciem piłki poza okno
-            self.x_cord = constants.WINDOW_WIDTH - self.width - 1
+            self.x_cord = window.width - self.width - 1
 
         # piłka wykracza poza okno gry z góry
         elif self.y_cord <= 0:
@@ -87,15 +87,15 @@ class Ball:
             self.y_cord = 1  # zabezpieczenie przed wypadnięciem piłki poza okno
 
         # piłka wykracza poza okno gry z dołu
-        elif self.rect.y > constants.WINDOW_HEIGHT:
-            judge.remove_life(window, game, self, game_over_menu)
+        elif self.rect.y > window.height:
+            judge.remove_life(game, self)
 
         # sprawdza czy nastąpiła kolizja między piłką a paletką
         elif self.rect.colliderect(racket.rect):
             # odległość środka piłki od środka paletki
             distance = (self.rect.x + self.width / 2) - (racket.rect.x + racket.width / 2)
             # zabezpieczenie przed wpadnięciem piłki w paletkę
-            self.y_cord = constants.RACKET_Y - constants.BALL_HEIGHT - 1
+            self.y_cord = racket.y_cord - self.height - 1
             self.bounce(distance)
 
         # sprawdza czy nastąpiła kolizja między piłką a klockiem
@@ -103,9 +103,10 @@ class Ball:
             if self.rect.colliderect(brick.rect):
                 bricks.remove(brick)  # usuń klocek z listy
                 if len(bricks) == 0:  # wszystkie klocki zbite
-                    win_menu.draw(window)  # wyświetl odpowiednie menu
-                    win_menu.run(game)
-                elif brick.rect.y <= self.rect.y <= brick.rect.y + brick.height - self.height:  # bok klocka
+                    game.reset()
+                    game.menu_id = 5  # wyświetl odpowiednie menu
+                    return
+                if brick.rect.y <= self.rect.y <= brick.rect.y + brick.height - self.height: # bok
                     self.direction = (360 - self.direction) % 360
                 else:  # dół lub góra klocka
                     self.bounce(0)

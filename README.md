@@ -8,7 +8,7 @@ Opisy wprowadzonych zmian w zależności od wersji:
 - v0.5 - poprawiono rozmiary niektórych elementów (klocków, piłki, okna gry)
 - v0.6 - poprawiono zachowanie piłki po kolizji z klockami, rozbudowano szablony testów
 - v0.7 - zmieniono implementację kodu odpowiedzialnego za menu w grze (stworzono odzielną klasę)
-- v0.7.1 - modyfikacja sposobu wywoływania menu w grze
+- v0.7.1 - dalsze modyfikacje menusów: modyfikacja sposobu wywoływania menu w grze
 
 Required_elements branch: gałąź z implementacjami wymaganych elementów do projektu
 
