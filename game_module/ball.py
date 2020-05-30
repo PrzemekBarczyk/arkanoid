@@ -1,15 +1,17 @@
 """Moduł zawierający klasę piłki"""
 
-import pygame
 import math
+
+import pygame
+
 from game_module import constants
 
 
 class Ball:
     """Klasa piłki:
 
-    Piłka sama kontroluje swoją prędkość i kierunek poruszania się, oraz wykrywa kolizje z paletką gracza i
-    klockami"""
+    Piłka sama kontroluje swoją prędkość i kierunek poruszania się, oraz wykrywa kolizje z paletką
+    gracza i klockami"""
 
     # wyłącza warning pylinta o za dużej liczbie zmiennych w klasie
     # pylint: disable=too-many-instance-attributes
@@ -17,19 +19,19 @@ class Ball:
         """Konstruktor inicjalizuje zmienne i tworzy powierzchnie piłki"""
 
         # wymiary piłki
-        self.width = constants.BALL_WIDTH
-        self.height = constants.BALL_HEIGHT
+        self.width = int(constants.BALL_WIDTH)
+        self.height = int(constants.BALL_HEIGHT)
 
         # początkowe współrzędne piłki
-        self.start_x_cord = constants.BALL_START_X
-        self.start_y_cord = constants.BALL_START_Y
+        self.start_x_cord = int(constants.BALL_START_X)
+        self.start_y_cord = int(constants.BALL_START_Y)
 
         # aktualne współrzędne piłki
-        self.x_cord = self.start_x_cord
-        self.y_cord = self.start_y_cord
+        self.x_cord = int(self.start_x_cord)
+        self.y_cord = int(self.start_y_cord)
 
         self.color = constants.COLOR_BALL
-        self.speed = constants.BALL_SPEED  # prędkość przemieszczania piłki w pikselach na tick procesora
+        self.speed = constants.BALL_SPEED  # prędkość poruszania piłki (piksele/tick procesora)
         self.direction = 150  # początkowy kąt poruszania się piłki w stopniach
 
         self.surface = pygame.Surface([self.width, self.height])  # utworzenie powierzchni obiektu
@@ -47,15 +49,16 @@ class Ball:
     def bounce(self, side):
         """Zmienia kierunek przemieszczania piłki po odbiciu od poziomej powierzchni"""
 
-        self.direction = (180 - self.direction) % 360  # oblicza zmiane kierunku
-        self.direction += side  # modyfikuje kierunek uwzględniając punkt paletki od którego odbiła się piłka
-        # self.rect.y = constants.RACKET_Y - self.width - 1 # chyba nic nie daje
+        # oblicza zmiane kierunku
+        self.direction = (180 - self.direction) % 360
+        # modyfikuje kierunek uwzględniając punkt paletki od którego odbiła się piłka
+        self.direction += side
 
-    def move(self, racket, bricks: list, window, game):
+    def move(self, racket, bricks: list, window, game, judge):
         """Przesuwa piłkę i wykrywa kolizje
 
-        Piłka jest przesuwana o wartość wektora prędkości. W przypadku wykrycia kolizji zmieniany jest kierunek
-        poruszania się piłki."""
+        Piłka jest przesuwana o wartość wektora prędkości. W przypadku wykrycia kolizji zmieniany
+        jest kierunek poruszania się piłki."""
 
         direction_radians = math.radians(self.direction)  # konwersja stopni na radiany
 
@@ -64,8 +67,8 @@ class Ball:
         self.y_cord -= self.speed * math.cos(direction_radians)
 
         # aktualizuje współrzędne obiektu piłki
-        self.rect.x = self.x_cord
-        self.rect.y = self.y_cord
+        self.rect.x = round(self.x_cord)
+        self.rect.y = round(self.y_cord)
 
         # piłka wykracza poza okno gry z lewej
         if self.rect.x <= 0:
@@ -73,9 +76,10 @@ class Ball:
             self.x_cord = 1  # zabezpieczenie przed wypadnięciem piłki poza okno
 
         # piłka wykracza poza okno gry z prawej
-        elif self.rect.x >= constants.WINDOW_WIDTH - self.width:
+        elif self.rect.x >= window.width - self.width:
             self.direction = (360 - self.direction) % 360
-            self.x_cord = constants.WINDOW_WIDTH - self.width - 1 # zabezpieczenie przed wypadnięciem piłki poza okno
+            # zabezpieczenie przed wypadnięciem piłki poza okno
+            self.x_cord = window.width - self.width - 1
 
         # piłka wykracza poza okno gry z góry
         elif self.y_cord <= 0:
@@ -83,13 +87,15 @@ class Ball:
             self.y_cord = 1  # zabezpieczenie przed wypadnięciem piłki poza okno
 
         # piłka wykracza poza okno gry z dołu
-        elif self.rect.y > constants.WINDOW_HEIGHT:
-            window.game_over_menu(window, game)
+        elif self.rect.y > window.height:
+            judge.remove_life(game, self)
 
         # sprawdza czy nastąpiła kolizja między piłką a paletką
         elif self.rect.colliderect(racket.rect):
             # odległość środka piłki od środka paletki
             distance = (self.rect.x + self.width / 2) - (racket.rect.x + racket.width / 2)
+            # zabezpieczenie przed wpadnięciem piłki w paletkę
+            self.y_cord = racket.y_cord - self.height - 1
             self.bounce(distance)
 
         # sprawdza czy nastąpiła kolizja między piłką a klockiem
@@ -97,8 +103,14 @@ class Ball:
             if self.rect.colliderect(brick.rect):
                 bricks.remove(brick)  # usuń klocek z listy
                 if len(bricks) == 0:  # wszystkie klocki zbite
-                    window.win_menu(window, game)  # wyświetl odpowiednie menu
-                self.bounce(0)
+                    game.reset()
+                    game.menu_id = 5  # wyświetl odpowiednie menu
+                    return
+                if brick.rect.y <= self.rect.y <= brick.rect.y + brick.height - self.height: # bok
+                    self.direction = (360 - self.direction) % 360
+                else:  # dół lub góra klocka
+                    self.bounce(0)
+                break  # zabezpieczenie przed zbiciem kilku klocków na raz
 
     def draw(self, window):
         """Rysuje piłkę w oknie"""

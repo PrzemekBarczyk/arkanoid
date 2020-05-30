@@ -1,42 +1,36 @@
-"""Moduł zwierający klasę sędziego gry - w budowie"""
+"""Moduł zwierający klasę sędziego gry"""
 
-# import pygame
-# from game_module import constants
-#
-#
-# class Judge:
-#     """Klasa sędziego gry:
-#
-#     Liczy ilość śmierci gracza oraz wyświetla informacje w oknie"""
-#
-#     def __init__(self, Window, Ball, Racket):
-#         self.ball = Ball
-#         self.window = Window
-#         self.racket = Racket
-#         self.score = 0
-#
-#         # Przed pisaniem tekstów, musimy zainicjować mechanizmy wyboru fontów PyGame
-#         pygame.font.init()
-#         font_path = pygame.font.match_font('arial')
-#         self.font = pygame.font.Font(font_path, constants.FONT_SIZE)
-#
-#     def update_score(self, board_height):
-#         """Przydziela punkty i ustawia piłeczkę w poczatkowym położeniu"""
-#         if self.ball.rect.y == board_height:
-#             self.score += 1
-#             self.ball.reset()
-#
-#     def draw_text(self, surface, text, x_cord, y_cord):
-#         """Rysuje podany tekst we wskazanym miejscu"""
-#         text = self.font.render(text, True, (150, 150, 150))
-#         rect = text.get_rect()
-#         rect.center = x_cord, y_cord
-#         surface.blit(text, rect)
-#
-#     def draw(self, Window):
-#         """Aktualizuje i rysuje wyniki"""
-#         height = self.window.surface.get_height()
-#         self.update_score(height)
-#
-#         width = self.window.surface.get_width()
-#         self.draw_text(Window.board, "counter: {}".format(self.score), width/2, height * 0.3)
+from game_module import constants
+
+
+class Judge:
+    """Klasa sędziego gry:
+
+    Liczy ilość śmierci gracza oraz wyświetla informacje o pozostałych życiach."""
+
+    def __init__(self):
+        self.lifes = 3
+
+    def remove_life(self, game, ball):
+        """Usuwa jedno życie i sprawdza ile zostało"""
+
+        self.lifes -= 1
+        if self.lifes <= 0:
+            game.reset()
+            game.menu_id = 3
+        else:
+            ball.reset()
+
+    def reset(self):
+        """Resetuje liczbę żyć gracza"""
+
+        self.lifes = 3
+
+    def draw(self, window):
+        """Aktualizuje i rysuje wyniki"""
+
+        text = "Lifes: " + str(self.lifes)
+        text_obj = constants.FONT_OPTIONS.render(text, True, (0, 0, 0))
+        text_rect = text_obj.get_rect()
+        text_rect.topleft = (constants.LIFES_X, constants.LIFES_Y)
+        window.surface.blit(text_obj, text_rect)

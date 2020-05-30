@@ -1,7 +1,8 @@
 """Wszystkie stałe występujące w programie"""
+# pylint: disable=no-member
 
 import pygame
-pygame.init()
+pygame.init()  # konieczne dla fontów
 
 # Fonts------------------------------------------
 FONT_HEADINGS = pygame.font.SysFont(None, 60) # czcionka nagłówków
@@ -31,43 +32,42 @@ COLOR_BLOCK = (34, 105, 125)  # niebieski
 
 # Ball-------------------------------------------
 # Prędkość poruszania piłki
-BALL_SPEED = 4
+BALL_SPEED = 3
 # Wymiary piłki
-BALL_WIDTH = 10
-BALL_HEIGHT = 10
+BALL_WIDTH = 15
+BALL_HEIGHT = 15
 # Początkowe współrzędne piłki
 BALL_START_X = 50
-BALL_START_Y = 50
+BALL_START_Y = 100
 
 # Racket-----------------------------------------
+# wymiary paletki
 RACKET_WIDTH = 80
 RACKET_HEIGHT = 16
-RACKET_X = RACKET_WIDTH/2 - 40
-RACKET_Y = RACKET_HEIGHT - 40
+# początkowe ustawienie paletki
+# RACKET_X = WINDOW_WIDTH/2 - RACKET_WIDTH/2
+# RACKET_Y = WINDOW_HEIGHT-40
 
 # Block------------------------------------------
-BLOCK_WIDTH = 60
-BLOCK_HEIGHT = 20
-BLOCK_X = 10
-BLOCK_Y = 10
-
-# Window-----------------------------------------
-WINDOW_WIDTH = 800
-WINDOW_HEIGHT = 600
-
-# Main menu--------------------------------------
-
-
-# Options menu-----------------------------------
-
-# Game over menu---------------------------------
+BLOCK_WIDTH = 100
+BLOCK_HEIGHT = 25
 
 # Button-----------------------------------------
-BUTTON_WIDTH = 250
+BUTTON_WIDTH = 300
 BUTTON_HEIGHT = 80
 
-# Judge------------------------------------------
-FONT_SIZE = 32  # 64
+# Menus
+RESOLUTIONS = [(800, 600), (1200, 800)]
+FULLSCREEN = [0, pygame.FULLSCREEN]
+FPS_LIMIT = [200, 300, 500]
 
-# Time-------------------------------------------
-FPS_LIMIT = 120
+MAIN_MENU_BUTTONS_NAMES = ["start", "options", "exit"]
+SETTINGS_MENU_BUTTONS_NAMES = ["difficulty: easy", "resolution: 800x600", "fullscreen: off",
+                               "main menu"]
+GAME_OVER_MENU_BUTTONS_NAMES = ["try again", "main menu", "exit"]
+PAUSE_MENU_BUTTONS_NAMES = ["continue", "main menu", "exit"]
+WIN_MENU_BUTTONS_NAMES = ["main menu", "exit"]
+
+# Judge------------------------------------------
+LIFES_X = 20
+LIFES_Y = 65
