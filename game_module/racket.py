@@ -1,4 +1,4 @@
-"""Moduł zawierający klase rakietki"""
+"""Moduł zawierający klase rakietki."""
 
 import pygame
 
@@ -11,13 +11,13 @@ class Racket:
     Porusza się w osi X sterowana przez gracza za pomocą myszy."""
 
     def __init__(self):
-        """Konstruktor inicjalizuje zmienne i tworzy powierzchnie piłki"""
+        """Konstruktor inicjalizuje zmienne i tworzy powierzchnie piłki."""
 
         self.width = constants.RACKET_WIDTH
         self.height = constants.RACKET_HEIGHT
         self.x_cord = 0
         self.y_cord = constants.RESOLUTIONS[0][1] - 40
-        self.color = constants.COLOR_RACKET
+        self.color = constants.RACKET_COLOR
 
         # konfiguruje kształt rakietki
         self.surface = pygame.Surface([self.width, self.height])  # utworzenie powierzchni obiektu
@@ -26,7 +26,7 @@ class Racket:
         self.rect = self.surface.get_rect(x=int(self.x_cord), y=int(self.y_cord))
 
     def move(self, x_cord, window):
-        """Przesuwa rakietkę o wyznaczone miejsce"""
+        """Przesuwa rakietkę o wyznaczone miejsce."""
 
         # wyznacza przesunięcie paletki gracza
         x_cord_new = x_cord - (self.width / 2)  # wyznacza nowe współrzędne paletki
@@ -42,12 +42,12 @@ class Racket:
         self.rect.x = round(x_cord_new)
 
     def update(self, window):
-        """Aktualizuje położenie paletki po zmianie rozdzielczości"""
+        """Aktualizuje położenie paletki po zmianie rozdzielczości."""
 
         self.y_cord = window.height - 40
         self.rect = self.surface.get_rect(x=int(self.x_cord), y=int(self.y_cord))
 
     def draw(self, window):
-        """Rysuje piłkę w oknie"""
+        """Rysuje piłkę w oknie."""
 
         window.surface.blit(self.surface, self.rect)

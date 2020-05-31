@@ -1,4 +1,4 @@
-"""Moduł łączący wszystkie elementy gry w całość"""
+"""Moduł łączący wszystkie elementy gry w całość."""
 # pylint: disable=too-many-instance-attributes
 # pylint: disable=no-member
 
@@ -9,15 +9,15 @@ from game_module import constants
 from game_module import judge
 from game_module import level
 from game_module import menus
-from game_module import window
 from game_module import racket
+from game_module import window
 
 
 class Game:
-    """Klasa nadzorująca pracę całego programu"""
+    """Klasa nadzorująca pracę całego programu."""
 
     def __init__(self):
-        """Konstruktor konfiguruje pracę programu, tworząc niezbęde obiekty"""
+        """Konstruktor konfiguruje pracę programu, tworząc niezbęde obiekty."""
 
         # tworzenie niezbędnych obiektów
         self.fps_clock = pygame.time.Clock()  # zegar do kontrolowania prędkości rysowania klatek
@@ -31,15 +31,14 @@ class Game:
         self.menu_id = 1  # zmienna określająca które menu zostanie wyświetlone
 
         # tworzenie menusów
-        self.main_menu = menus.MainMenu("main menu", constants.MAIN_MENU_BUTTONS_NAMES)
-        self.settings_menu = menus.SettingsMenu("settings", constants.SETTINGS_MENU_BUTTONS_NAMES)
-        self.game_over_menu = menus.GameOverMenu("game over",
-                                                 constants.GAME_OVER_MENU_BUTTONS_NAMES)
-        self.pause_menu = menus.PauseMenu("pause", constants.PAUSE_MENU_BUTTONS_NAMES)
-        self.win_menu = menus.WinMenu("You won!", constants.WIN_MENU_BUTTONS_NAMES)
+        self.main_menu = menus.MainMenu()
+        self.settings_menu = menus.SettingsMenu()
+        self.game_over_menu = menus.GameOverMenu()
+        self.pause_menu = menus.PauseMenu()
+        self.win_menu = menus.WinMenu()
 
     def check_which_menu(self):
-        """Uruchamia odpowienie menu na podstawie wartości atrybutu instancji menu_id"""
+        """Uruchamia odpowienie menu na podstawie wartości atrybutu instancji menu_id."""
 
         while self.menu_id > 0:  # póki nie zwrócono odpowiedniej wartości
 
@@ -92,7 +91,7 @@ class Game:
             self.fps_clock.tick(self.fps)
 
     def handle_events(self):
-        """Funkcja obsługująca zdarzenia systemowe
+        """Funkcja obsługująca zdarzenia systemowe.
 
         Return:
             True jeśli użytkownik kliknął ikone krzyżyka w oknie programu.
@@ -111,7 +110,7 @@ class Game:
             return False
 
     def update(self):
-        """Dopasowuje położenie klocków i paletki do nowej rozdzielczości"""
+        """Dopasowuje położenie klocków i paletki do nowej rozdzielczości."""
 
         self.player.update(self.window)
         self.level.reset(self.window)
