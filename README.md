@@ -15,3 +15,4 @@ Required_elements branch: gałąź z implementacjami wymaganych elementów do pr
 Opisy wprowadzonych zmian w zależności od wersji:
 - v0.1 - utworzenie nowego modułu na klasy wyjątków i stworzenie klasy głównej wyjątków.
 - v0.2 - zawarcie w programie mechanizm List comprehensions do tworzenia listy obiektów typu Block.
+- v0.3 - usunięcie modułu na klasy wyjątków (skoro nie jest konieczna ich implementacja to nie dodaję ich na siłę).
