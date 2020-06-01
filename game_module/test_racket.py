@@ -4,6 +4,7 @@ import unittest
 
 from game_module import constants
 from game_module import racket
+import game
 
 
 class TestRacket(unittest.TestCase):
@@ -13,9 +14,12 @@ class TestRacket(unittest.TestCase):
         """Uruchamia się przed wykonaniem każdego z testów."""
 
         self.racket = racket.Racket()
+        self.game = game.Game()
 
     def tearDown(self):
         """Uruchamia się po wykonaniu każdego z testów."""
+
+        del self.racket, self.game
 
     def test_default_vaules(self):
         """Test poprawności iniicjalizacji danych."""
@@ -31,3 +35,9 @@ class TestRacket(unittest.TestCase):
 
     def test_draw(self):
         """Test metody draw()."""
+
+        self.racket.draw(self.game.window)
+
+
+if __name__ == '__main__':
+    unittest.main()

@@ -4,6 +4,7 @@ import unittest
 
 from game_module import ball
 from game_module import constants
+import game
 
 
 class TestBall(unittest.TestCase):
@@ -13,13 +14,17 @@ class TestBall(unittest.TestCase):
         """Uruchamia się przed wykonaniem każdego z testów."""
 
         self.ball = ball.Ball()
+        self.game = game.Game()
 
     def tearDown(self):
         """Uruchamia się po wykonaniu każdego z testów."""
 
+        del self.ball, self.game
+
     def test_default_vaules(self):
         """Test poprawności iniicjalizacji danych."""
 
+        # sprawdzam czy w trakcie inicjalizacji utworzono obiekty o odpowiednich wartościach
         self.assertEqual(self.ball.width, int(constants.BALL_WIDTH))
         self.assertEqual(self.ball.height, int(constants.BALL_HEIGHT))
         self.assertEqual(self.ball.start_x_cord, int(constants.BALL_START_X))
@@ -33,7 +38,7 @@ class TestBall(unittest.TestCase):
     def test_reset(self):
         """Test metody reset()."""
 
-        self.ball.reset()  # wywołanie testowanej funkcji
+        self.ball.reset()  # wywołanie testowanej metody
 
         # sprawdzenie poprawności wyników
         self.assertEqual(self.ball.x_cord, self.ball.start_x_cord)
@@ -57,10 +62,13 @@ class TestBall(unittest.TestCase):
     def test_move(self):
         """Test metody move()."""
 
-        # self.ball.move()
+        self.ball.move(self.game.player, self.game.level.blocks, self.game.window,
+                       self, self.game.judge)
 
     def test_draw(self):
         """Testy metody draw()."""
+
+        self.ball.draw(self.game.window)
 
 
 if __name__ == '__main__':

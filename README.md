@@ -10,6 +10,7 @@ Opisy wprowadzonych zmian w zależności od wersji:
 - v0.7 - zmieniono implementację kodu odpowiedzialnego za menu w grze (stworzono odzielną klasę).
 - v0.7.1 - dalsze modyfikacje menusów: modyfikacja sposobu wywoływania menu w grze.
 - v0.8 - poprawki do Uwag drobiazgowych z pliku README.md.
+- v0.9 - rozbudowano testy dla głównych modułów
 
 Required_elements branch: gałąź z implementacjami wymaganych elementów do projektu
 

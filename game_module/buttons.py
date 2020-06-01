@@ -20,7 +20,7 @@ class Button:
         """Konstruktor inicjalizuje zminne i tworzy powierzchnie klocka."""
 
         self.name = name
-        self.x_cord = constants.RESOLUTIONS[0][0] / 2 - self.width / 2
+        self.x_cord = constants.RESOLUTIONS[0][0] // 2 - self.width // 2
         self.y_cord = y
         self.button_color = button_color
         self.text_color = text_color
@@ -31,7 +31,7 @@ class Button:
     def draw(self, window):
         """Rysuje przycisk."""
 
-        self.x_cord = window.width / 2 - self.width / 2
+        self.x_cord = window.width // 2 - self.width // 2
         # utworzenie powierzchni obiektu i ustawienie w odpowiedniej pozycji
         self.rect = pygame.Rect(self.x_cord, self.y_cord, self.width, self.height)
 
