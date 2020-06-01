@@ -1,4 +1,4 @@
-"""Moduł zawierający klasę piłki"""
+"""Moduł zawierający klasę piłki."""
 
 import math
 
@@ -16,7 +16,7 @@ class Ball:
     # wyłącza warning pylinta o za dużej liczbie zmiennych w klasie
     # pylint: disable=too-many-instance-attributes
     def __init__(self):
-        """Konstruktor inicjalizuje zmienne i tworzy powierzchnie piłki"""
+        """Konstruktor inicjalizuje zmienne i tworzy powierzchnie piłki."""
 
         # wymiary piłki
         self.width = int(constants.BALL_WIDTH)
@@ -30,7 +30,7 @@ class Ball:
         self.x_cord = int(self.start_x_cord)
         self.y_cord = int(self.start_y_cord)
 
-        self.color = constants.COLOR_BALL
+        self.color = constants.BALL_COLOR
         self.speed = constants.BALL_SPEED  # prędkość poruszania piłki (piksele/tick procesora)
         self.direction = 150  # początkowy kąt poruszania się piłki w stopniach
 
@@ -40,14 +40,14 @@ class Ball:
         pygame.draw.ellipse(self.surface, self.color, [0, 0, self.width, self.height])
 
     def reset(self):
-        """Resetuje ustawienie i kierunek poruszania się piłki"""
+        """Resetuje ustawienie i kierunek poruszania się piłki."""
 
         self.x_cord = self.start_x_cord
         self.y_cord = self.start_y_cord
         self.direction = 150
 
     def bounce(self, side):
-        """Zmienia kierunek przemieszczania piłki po odbiciu od poziomej powierzchni"""
+        """Zmienia kierunek przemieszczania piłki po odbiciu od poziomej powierzchni."""
 
         # oblicza zmiane kierunku
         self.direction = (180 - self.direction) % 360
@@ -55,7 +55,7 @@ class Ball:
         self.direction += side
 
     def move(self, racket, bricks: list, window, game, judge):
-        """Przesuwa piłkę i wykrywa kolizje
+        """Przesuwa piłkę i wykrywa kolizje.
 
         Piłka jest przesuwana o wartość wektora prędkości. W przypadku wykrycia kolizji zmieniany
         jest kierunek poruszania się piłki."""
@@ -102,7 +102,7 @@ class Ball:
         for brick in bricks:
             if self.rect.colliderect(brick.rect):
                 bricks.remove(brick)  # usuń klocek z listy
-                if len(bricks) == 0:  # wszystkie klocki zbite
+                if not bricks:  # wszystkie klocki zbite
                     game.reset()
                     game.menu_id = 5  # wyświetl odpowiednie menu
                     return
@@ -113,6 +113,6 @@ class Ball:
                 break  # zabezpieczenie przed zbiciem kilku klocków na raz
 
     def draw(self, window):
-        """Rysuje piłkę w oknie"""
+        """Rysuje piłkę w oknie."""
 
         window.surface.blit(self.surface, self.rect)

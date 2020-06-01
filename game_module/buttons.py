@@ -1,4 +1,4 @@
-"""Moduł zawierający klase przycisków"""
+"""Moduł zawierający klase przycisków."""
 
 import pygame
 
@@ -15,12 +15,12 @@ class Button:
     width = constants.BUTTON_WIDTH
     height = constants.BUTTON_HEIGHT
 
-    def __init__(self, name, y=0, button_color=constants.COLOR_BUTTON,
-                 text_color=constants.COLOR_BUTTON_TEXT):
-        """Konstruktor inicjalizuje zminne i tworzy powierzchnie klocka"""
+    def __init__(self, name, y=0, button_color=constants.BUTTON_COLOR,
+                 text_color=constants.BUTTON_TEXT_COLOR):
+        """Konstruktor inicjalizuje zminne i tworzy powierzchnie klocka."""
 
         self.name = name
-        self.x_cord = constants.RESOLUTIONS[0][0] / 2 - self.width / 2
+        self.x_cord = constants.RESOLUTIONS[0][0] // 2 - self.width // 2
         self.y_cord = y
         self.button_color = button_color
         self.text_color = text_color
@@ -29,9 +29,9 @@ class Button:
         self.rect = pygame.Rect(self.x_cord, self.y_cord, self.width, self.height)
 
     def draw(self, window):
-        """Rysuje przycisk"""
+        """Rysuje przycisk."""
 
-        self.x_cord = window.width / 2 - self.width / 2
+        self.x_cord = window.width // 2 - self.width // 2
         # utworzenie powierzchni obiektu i ustawienie w odpowiedniej pozycji
         self.rect = pygame.Rect(self.x_cord, self.y_cord, self.width, self.height)
 
