@@ -11,6 +11,7 @@ Opisy wprowadzonych zmian w zależności od wersji:
 - v0.7.1 - dalsze modyfikacje menusów: modyfikacja sposobu wywoływania menu w grze.
 - v0.8 - poprawki do Uwag drobiazgowych z pliku README.md.
 - v0.9 - rozbudowano testy dla głównych modułów
+- v0.9.1 - zmieniono nazwy testów, usunięto docstringi, wymienione w Uwagach testy, oraz docstringi. Wprowadzono nazwane stałe. Dodano klasę Fonts w module constants ładującą czcionki. Zmieniono nazwę zmiennej przechowującą liczbę żyć.
 
 Required_elements branch: gałąź z implementacjami wymaganych elementów do projektu
 
