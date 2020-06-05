@@ -7,15 +7,9 @@ import pygame
 class Fonts:  # pylint: disable=too-few-public-methods
     """Przechowuje czcionki."""
 
-    FONT_HEADINGS = 0
-    FONT_OPTIONS = 0
-
     @staticmethod
     def load():
         """Wczytuje czcionki z dysku."""
-
-        pygame.init()  # biblioteki pygame
-        pygame.font.init()  # czcionki
 
         Fonts.FONT_HEADINGS = pygame.font.SysFont(None, 60)  # czcionka nagłówków
         Fonts.FONT_OPTIONS = pygame.font.SysFont(None, 40)  # czcionka tekstów z menu'sów

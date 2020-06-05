@@ -28,11 +28,6 @@ class GameTest(unittest.TestCase):
         self.assertIsInstance(self.game.judge, judge.Judge)
         self.assertIsInstance(self.game.level, level.Level)
 
-    def test_run(self):
-
-        # sprawdzam czy metoda rzuca odpowiedni wyjątek
-        self.assertRaises(SystemExit, lambda: self.game.run())  # wywołanie testowanej metody
-
     def test_update(self):
 
         # sprawdzam czy dane zostały poprawnie zaaktualizowane

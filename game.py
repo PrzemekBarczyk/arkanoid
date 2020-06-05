@@ -132,6 +132,7 @@ def main():
     główną pętlą programu."""
 
     # inicjalizacja bibliotek zewnętrznych
+    pygame.init()
     constants.Fonts.load()
 
     # tworzenie obiektów odpowiednich klas
