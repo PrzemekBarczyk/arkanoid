@@ -13,6 +13,7 @@ Opisy wprowadzonych zmian w zależności od wersji:
 - v0.9 - rozbudowano testy dla głównych modułów
 - v0.9.1 - zmieniono nazwy testów, usunięto docstringi, wymienione w Uwagach testy, oraz docstringi. Wprowadzono nazwane stałe. Dodano klasę Fonts w module constants ładującą czcionki. Zmieniono nazwę zmiennej przechowującą liczbę żyć.
 - v0.9.2 - usunięto zasugerowane linie z klasy Fonts w module constants.py, oraz inicjalizowanie fontów. Przeniesiono pygame.init() do main().
+- v0.9.3 - usunięcto zbęde tworzenie okiektu klasy Game w setUp'ach niektórych testów. Rozbudowano testy modułu window.py.
 
 Required_elements branch: gałąź z implementacjami wymaganych elementów do projektu
 

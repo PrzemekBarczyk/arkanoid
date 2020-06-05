@@ -6,7 +6,6 @@ import unittest
 
 from game_module import constants
 from game_module import racket
-import game
 
 
 class RacketTest(unittest.TestCase):
@@ -14,7 +13,6 @@ class RacketTest(unittest.TestCase):
     def setUp(self):
 
         self.racket = racket.Racket()
-        self.game = game.Game()
 
     def test_default_vaules(self):
 

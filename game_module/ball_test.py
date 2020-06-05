@@ -6,7 +6,6 @@ import unittest
 
 from game_module import ball
 from game_module import constants
-import game
 
 
 class BallTest(unittest.TestCase):
@@ -14,7 +13,6 @@ class BallTest(unittest.TestCase):
     def setUp(self):
 
         self.ball = ball.Ball()
-        self.game = game.Game()
 
     def test_default_vaules(self):
 
