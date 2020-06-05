@@ -28,7 +28,7 @@ class Game:
         self.judge = judge.Judge()  # tworzy sędziego gry
         self.level = level.Level()  # tworzy bloki w pewnej konfiguracji
 
-        self.menu_id = 1  # zmienna określająca które menu zostanie wyświetlone
+        self.menu_id = constants.MAIN_MENU_ID  # określa które menu najpierw wyświetli
 
         # tworzenie menusów
         self.main_menu = menus.MainMenu()
@@ -38,27 +38,27 @@ class Game:
         self.win_menu = menus.WinMenu()
 
     def check_which_menu(self):
-        """Uruchamia odpowienie menu na podstawie wartości atrybutu instancji menu_id."""
+        """Uruchamia odpowienie menu na podstawie wartości zmiennej menu_id."""
 
         while self.menu_id > 0:  # póki nie zwrócono odpowiedniej wartości
 
-            if self.menu_id == 1:  # main menu
-                self.main_menu.draw(self.window)  # rysuje menu główne
+            if self.menu_id == constants.MAIN_MENU_ID:
+                self.main_menu.draw(self.window)
                 self.menu_id = self.main_menu.run()
 
-            elif self.menu_id == 2:  # settings menu
+            elif self.menu_id == constants.SETTINGS_MENU_ID:
                 self.settings_menu.draw(self.window)
                 self.menu_id = self.settings_menu.run(self.window, self)
 
-            elif self.menu_id == 3:  # game over menu
+            elif self.menu_id == constants.GAME_OVER_MENU_ID:
                 self.game_over_menu.draw(self.window)
                 self.menu_id = self.game_over_menu.run(self)
 
-            elif self.menu_id == 4:  # pause menu
+            elif self.menu_id == constants.PAUSE_MENU_ID:
                 self.pause_menu.draw(self.window)
                 self.menu_id = self.pause_menu.run(self)
 
-            elif self.menu_id == 5:  # win menu
+            elif self.menu_id == constants.WIN_MENU_ID:
                 self.win_menu.draw(self.window)
                 self.menu_id = self.win_menu.run(self)
 
@@ -103,7 +103,7 @@ class Game:
                 return True
             if event.type == pygame.KEYDOWN:  # wciśnięto klawisz na klawiaturze
                 if event.key == pygame.K_ESCAPE or pygame.K_p:  # ESCAPE lub P
-                    self.menu_id = 4  # uruchom pause menu
+                    self.menu_id = constants.PAUSE_MENU_ID
             if event.type == pygame.MOUSEMOTION:  # poruszono myszą
                 xy_cord = event.pos  # pobiera aktualne współrzędne kursora
                 self.player.move(xy_cord[0], self.window)
@@ -132,8 +132,8 @@ def main():
     główną pętlą programu."""
 
     # inicjalizacja bibliotek zewnętrznych
-    pygame.init()  # biblioteki pygame
-    pygame.font.init()  # czcionki
+    pygame.init()
+    constants.Fonts.load()
 
     # tworzenie obiektów odpowiednich klas
     game = Game()

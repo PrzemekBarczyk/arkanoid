@@ -1,11 +1,12 @@
 """Moduł zawierający klase przycisków."""
+# pylint: disable=no-member
 
 import pygame
 
 from game_module import constants
 
 
-class Button:
+class Button:  # pylint: disable=too-few-public-methods
     """Klasa przycisków z menu:
 
     Przyciski mogą być wybrane przez gracza przy użyciu myszy poprzez naprowadzenie kursora na ich
@@ -37,7 +38,7 @@ class Button:
 
         pygame.draw.rect(window.surface, self.button_color, self.rect) # rysuje tło przycisku
 
-        text_obj = constants.FONT_OPTIONS.render(self.name, True, self.text_color)
+        text_obj = constants.Fonts.FONT_OPTIONS.render(self.name, True, self.text_color)
         text_rect = text_obj.get_rect()
         text_rect.center = (self.x_cord + self.width // 2, self.y_cord + self.height // 2)
         window.surface.blit(text_obj, text_rect)

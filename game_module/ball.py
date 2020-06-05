@@ -31,10 +31,10 @@ class Ball:
         self.y_cord = int(self.start_y_cord)
 
         self.color = constants.BALL_COLOR
-        self.speed = constants.BALL_SPEED  # prędkość poruszania piłki (piksele/tick procesora)
-        self.direction = 150  # początkowy kąt poruszania się piłki w stopniach
+        self.speed = constants.BALL_SPEED  # prędkość poruszania piłki [piksele/tick procesora]
+        self.direction = constants.BALL_DIRECTION  # początkowy kąt poruszania się piłki [stopnie]
 
-        self.surface = pygame.Surface([self.width, self.height])  # utworzenie powierzchni obiektu
+        self.surface = pygame.Surface([self.width, self.height])  # pylint: disable=too-many-function-args
         # ustawienie prostokąta zawierającego obiekt w początkowej pozycji
         self.rect = self.surface.get_rect(x=self.start_x_cord, y=self.start_y_cord)
         pygame.draw.ellipse(self.surface, self.color, [0, 0, self.width, self.height])
@@ -44,7 +44,7 @@ class Ball:
 
         self.x_cord = self.start_x_cord
         self.y_cord = self.start_y_cord
-        self.direction = 150
+        self.direction = constants.BALL_DIRECTION
 
     def bounce(self, side):
         """Zmienia kierunek przemieszczania piłki po odbiciu od poziomej powierzchni."""
@@ -54,7 +54,7 @@ class Ball:
         # modyfikuje kierunek uwzględniając punkt paletki od którego odbiła się piłka
         self.direction += side
 
-    def move(self, racket, bricks: list, window, game, judge):
+    def move(self, racket, bricks: list, window, game, judge):  # pylint: disable=too-many-arguments
         """Przesuwa piłkę i wykrywa kolizje.
 
         Piłka jest przesuwana o wartość wektora prędkości. W przypadku wykrycia kolizji zmieniany

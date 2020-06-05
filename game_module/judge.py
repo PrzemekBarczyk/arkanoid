@@ -1,4 +1,5 @@
 """Moduł zwierający klasę sędziego gry."""
+# pylint: disable=no-member
 
 from game_module import constants
 
@@ -9,28 +10,28 @@ class Judge:
     Liczy ilość śmierci gracza oraz wyświetla informacje o pozostałych życiach."""
 
     def __init__(self):
-        self.lifes = 3
+        self.lives = constants.LIVES  # 3
 
     def remove_life(self, game, ball):
         """Usuwa jedno życie i sprawdza ile zostało."""
 
-        self.lifes -= 1
-        if self.lifes <= 0:
+        self.lives -= 1
+        if self.lives <= 0:
             game.reset()
-            game.menu_id = 3
+            game.menu_id = constants.GAME_OVER_MENU_ID
         else:
             ball.reset()
 
     def reset(self):
         """Resetuje liczbę żyć gracza."""
 
-        self.lifes = 3
+        self.lives = constants.LIVES  # 3
 
     def draw(self, window):
         """Aktualizuje i rysuje wyniki."""
 
-        text = 'Lifes: {}'.format(str(self.lifes))
-        text_obj = constants.FONT_OPTIONS.render(text, True, constants.LIFES_COLOR)
+        text = 'Lives: {}'.format(str(self.lives))
+        text_obj = constants.Fonts.FONT_OPTIONS.render(text, True, constants.LIVES_COLOR)
         text_rect = text_obj.get_rect()
-        text_rect.topleft = (constants.LIFES_STATUS_X, constants.LIFES_STATUS_Y)
+        text_rect.topleft = (constants.LIVES_STATUS_X, constants.LIVES_STATUS_Y)
         window.surface.blit(text_obj, text_rect)

@@ -11,6 +11,8 @@ Opisy wprowadzonych zmian w zależności od wersji:
 - v0.7.1 - dalsze modyfikacje menusów: modyfikacja sposobu wywoływania menu w grze.
 - v0.8 - poprawki do Uwag drobiazgowych z pliku README.md.
 - v0.9 - rozbudowano testy dla głównych modułów
+- v0.9.1 - zmieniono nazwy testów, usunięto docstringi, wymienione w Uwagach testy, oraz docstringi. Wprowadzono nazwane stałe. Dodano klasę Fonts w module constants ładującą czcionki. Zmieniono nazwę zmiennej przechowującą liczbę żyć.
+- v0.9.2 - usunięto zasugerowane linie z klasy Fonts w module constants.py, oraz inicjalizowanie fontów. Przeniesiono pygame.init() do main().
 
 Required_elements branch: gałąź z implementacjami wymaganych elementów do projektu
 

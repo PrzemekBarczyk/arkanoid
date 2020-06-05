@@ -77,11 +77,6 @@ class MainMenu(Menu):
         'Options' otwiera menu opcji.
         'Exit' kończy pracę programu.
 
-        Returns:
-            Kod 0 po naciśnięciu przycisku 'start', który odpowiada za uruchomienie rozgrywki.
-            Kod 2 po naciśnięciu przycisku 'options', który odpowiada za uruchomienie menu z
-            opcjami.
-
         Raises:
              SystemExit(0): naciśnięto klawisz 'exit' odpowiadający za zakończenie rozgrywki."""
 
@@ -89,11 +84,12 @@ class MainMenu(Menu):
         while True:
             # sprawdzenie który przycisk został naciśnięty
             button_number = check_which_button(self.buttons_objects)
-            if button_number == 1:  # wybrano 'start'
-                return 0  # uruchamia rozgrywkę
-            if button_number == 2:  # wybrano 'options'
-                return 2  # uruchomia menu opcji
-            if button_number == 3:  # wybrano 'close'
+
+            if button_number == constants.MAIN_MENU_START:  # wybrano 'start'
+                return constants.GAME_ID  # uruchamia rozgrywkę
+            if button_number == constants.MAIN_MENU_OPTIONS:  # wybrano 'options'
+                return constants.SETTINGS_MENU_ID  # uruchomia menu opcji
+            if button_number == constants.MAIN_MENU_EXIT:  # wybrano 'exit'
                 pygame.quit()
                 sys.exit(0)
 
@@ -130,11 +126,7 @@ class SettingsMenu(Menu):
         do zmiany poziomu trudności. Domyśla rozdzielczość to 800x600.
         'Fullscreen' zaznaczenie tej opcji zmienia tryb wyświetlania programu na
         pełnoekranowy lub okienkowy. Domyślnie aplikacja wyświetlana jest w oknie.
-        'Main menu' pozwala na powrót do menu głównego.
-
-        Returns:
-            Kod 1 po naciśnięciu przycisku 'main menu', który odpowiada za uruchomienie menu
-            głównego."""
+        'Main menu' pozwala na powrót do menu głównego."""
 
         while True:
             print("entered settings menu")
@@ -142,23 +134,23 @@ class SettingsMenu(Menu):
             button_number = check_which_button(self.buttons_objects)
 
             # podjęcie odpowiednich działań w zależności od przyciśniętego przycisku
-            if button_number == 1:  # wybrano 'difficulty'
+            if button_number == constants.SETTINGS_MENU_DIFFICULTY:
                 self.difficulty_nr += 1  # zmienia poziom trudności na następny
 
                 # zmiana limitu FPS
                 game.fps = constants.FPS_LIMIT[self.difficulty_nr % 3]
 
                 # aktualizacja napisu na przycisku
-                if self.difficulty_nr % 3 == 0:  # easy
+                if self.difficulty_nr % 3 == constants.SETTINGS_MENU_EASY:
                     self.buttons_objects[0].name = "difficulty: easy"
-                elif self.difficulty_nr % 3 == 1:  # medium
+                elif self.difficulty_nr % 3 == constants.SETTINGS_MENU_MEDIUM:
                     self.buttons_objects[0].name = "difficulty: medium"
-                elif self.difficulty_nr % 3 == 2:  # hard
+                elif self.difficulty_nr % 3 == constants.SETTINGS_MENU_HARD:
                     self.buttons_objects[0].name = "difficulty: hard"
 
                 self.draw(window)  # nanosi zmiany na ekran
 
-            elif button_number == 2:  # wybrano 'resolution'
+            elif button_number == constants.SETTINGS_MENU_RESOLUTIONS:
                 self.resolution_nr += 1  # zmienia rozdzielczość na następną
 
                 # aktualizacja bieżącej rozdzielczości
@@ -166,16 +158,16 @@ class SettingsMenu(Menu):
                               constants.FULLSCREEN[self.fullscreen_nr % 2])
 
                 # aktualizacja napisu na przycisku
-                if self.resolution_nr % 2 == 0:  # 800x600
+                if self.resolution_nr % 2 == constants.SETTINGS_MENU_LOW_RES:  # 800x600
                     self.buttons_objects[1].name = "resolution: 800x600"
-                elif self.resolution_nr % 2 == 1:  # 1200x900
+                elif self.resolution_nr % 2 == constants.SETTINGS_MENU_HIGH_RES:  # 1200x900
                     self.buttons_objects[1].name = "resolution: 1200x900"
 
                 # dopasowuje elementy do nowej rozdzielczości i nanosi zmiany na ekran
                 game.update()
                 self.draw(window)
 
-            elif button_number == 3:  # wybrano 'fullscreen'
+            elif button_number == constants.SETTINGS_MENU_FULLSCREEN:
                 self.fullscreen_nr += 1  # zmienia tryb okna na następny
 
                 # zmiana trybu wyświetlania okna i aktualizacja zmian
@@ -183,15 +175,15 @@ class SettingsMenu(Menu):
                               constants.FULLSCREEN[self.fullscreen_nr % 2])
 
                 # aktualizacja napisu na przycisku
-                if self.fullscreen_nr % 2 == 0:  # on
+                if self.fullscreen_nr % 2 == constants.SETTINGS_MENU_FULLSCREEN_OFF:
                     self.buttons_objects[2].name = "fullscreen: off"
-                elif self.fullscreen_nr % 2 == 1:  # off
+                elif self.fullscreen_nr % 2 == constants.SETTINGS_MENU_FULLSCREEN_ON:
                     self.buttons_objects[2].name = "fullscreen: on"
 
                 self.draw(window)  # nanosi zmiany na ekran
 
-            elif button_number == 4:  # wybrano 'main menu'
-                return 1  # uruchom menu główne
+            elif button_number == constants.SETTING_MENU_MAIN_MENU:
+                return constants.MAIN_MENU_ID  # uruchom menu główne
 
 
 class GameOverMenu(Menu):
@@ -213,12 +205,6 @@ class GameOverMenu(Menu):
         'Try again' uruchamia rozgrywkę jeszcze raz.
         'Main menu' otwiera menu główne.
 
-        Attributes:
-            Kod 0 po naciśnięciu przycisku 'try again', który odpowiada za ponowne uruchomienie
-            rozgrywki ze zresetowanym stanem gry.
-            Kod 1 po naciśnięciu przycisku 'main menu', który odpowiada za uruchomienie menu
-            głównego.
-
         Raises:
             SystemExit(0): naciśnięto klawisz 'exit' odpowiadający za zakończenie rozgrywki."""
 
@@ -228,11 +214,11 @@ class GameOverMenu(Menu):
             # sprawdzenie który przycisk został naciśnięty
             button_number = check_which_button(self.buttons_objects)
 
-            if button_number == 1:  # wybrano 'try again'
-                return 0  # uruchamia rozgrywkę
-            if button_number == 2:  # wybrano 'main menu'
-                return 1  # uruchamia menu główne
-            if button_number == 3:  # wybrano 'exit'
+            if button_number == constants.GAME_OVER_TRY_AGAIN:
+                return constants.GAME_ID  # uruchamia rozgrywkę
+            if button_number == constants.GAME_OVER_MAIN_MENU:
+                return constants.MAIN_MENU_ID  # uruchamia menu główne
+            if button_number == constants.GAME_OVER_EXIT:
                 pygame.quit()
                 sys.exit(0)
 
@@ -260,12 +246,6 @@ class PauseMenu(Menu):
         'Exit' kończy pracę programu. Powrót do rozgrywki możliwy jest również przy użyciu
         tych samych klawiszy które słuszą do wywołania menu.
 
-        Attributes:
-            Kod 0 po naciśnięciu przycisku 'continue', który odpowiada za kontynuowanie
-            rozgrywki.
-            Kod 1 po naciśnięciu przycisku 'main menu', który odpowiada za otwarcie
-            menu głównego.
-
         Raises:
             SystemExit(0): naciśnięto klawisz 'exit' odpowiadający za zakończenie rozgrywki."""
 
@@ -274,12 +254,13 @@ class PauseMenu(Menu):
             # sprawdzenie który przycisk został naciśnięty
             button_number = check_which_button(self.buttons_objects, (pygame.K_ESCAPE, pygame.K_p))
 
-            if button_number == 1 or button_number == 0:  # wybrano 'continue', 'ESCAPE' lub 'P'
-                return 0  # wraca do gry
-            if button_number == 2:  # wybrano 'main menu'
+            if button_number == constants.PAUSE_MENU_CONTINUE or \
+                    button_number == constants.PAUSE_MENU_ESCAPE_P:
+                return constants.GAME_ID  # wraca do gry
+            if button_number == constants.PAUSE_MENU_MAIN_MENU:  # wybrano 'main menu'
                 game.reset()  # resetuje stan gry (piłke, level, sędziego)
-                return 1  # uruchamia menu główne
-            if button_number == 3:  # wybrano 'exit'
+                return constants.MAIN_MENU_ID  # uruchamia menu główne
+            if button_number == constants.PAUSE_MENU_EXIT:  # wybrano 'exit'
                 pygame.quit()
                 sys.exit(0)
 
@@ -305,9 +286,6 @@ class WinMenu(Menu):
         Składa się z przycisków: 'main menu', który przenosi do menu głównego poprzez zwrócenie
         kodu 1, oraz 'exit' który kończy pracę programu.
 
-        Returns:
-            Kod 1 po naciśnięciu przycisku 'main menu', który uruchamia menu główne.
-
         Raises:
             SystemExit(0): naciśnięto klawisz 'exit' odpowiadający za zakończenie rozgrywki."""
 
@@ -316,19 +294,20 @@ class WinMenu(Menu):
         while True:
             # sprawdzenie który przycisk został naciśnięty
             button_number = check_which_button(self.buttons_objects)
-            if button_number == 1:  # wybrano 'main menu'
+
+            if button_number == constants.WIN_MENU_MAIN_MENU:
                 game.reset()
-                return 1  # uruchamia menu główne
-            if button_number == 2:  # wybrano 'exit'
+                return constants.MAIN_MENU_ID  # uruchamia menu główne
+            if button_number == constants.WIN_MENU_EXIT:
                 pygame.quit()
                 sys.exit(0)
 
 
-def enumerate_with_step(xs, start=0, step=100):
+def enumerate_with_step(xs, start=0, step=100):  # pylint: disable=invalid-name
     """Funkcja działająca jak enumerate, pozwalająca dodatkowo wyznaczyć krok o jaki
     zwiększane są wartości."""
 
-    for x in xs:
+    for x in xs:  # pylint: disable=invalid-name
         yield start, x
         start += step
 
@@ -336,7 +315,7 @@ def enumerate_with_step(xs, start=0, step=100):
 def print_headline(window, text, color):
     """Funkcja pomocnicza do pisania nagłówków w menu."""
 
-    headline_obj = constants.FONT_HEADINGS.render(text, True, color)
+    headline_obj = constants.Fonts.FONT_HEADINGS.render(text, True, color)
     headline_rect = headline_obj.get_rect()
     headline_rect.center = (window.width // 2, 30)
     window.surface.blit(headline_obj, headline_rect)
