@@ -43,8 +43,6 @@ class Menu:
             button_y, button_name = button
             self.buttons_objects.append(buttons.Button(button_name, y=button_y))
 
-        print("created " + self.headline)
-
     def draw(self, window):
         """Rysuje odpowiednie menu."""
 
@@ -80,7 +78,6 @@ class MainMenu(Menu):
         Raises:
              SystemExit(0): naciśnięto klawisz 'exit' odpowiadający za zakończenie rozgrywki."""
 
-        print("entered main menu")
         while True:
             # sprawdzenie który przycisk został naciśnięty
             button_number = check_which_button(self.buttons_objects)
@@ -129,7 +126,6 @@ class SettingsMenu(Menu):
         'Main menu' pozwala na powrót do menu głównego."""
 
         while True:
-            print("entered settings menu")
             # sprawdzenie który przycisk został naciśnięty
             button_number = check_which_button(self.buttons_objects)
 
@@ -208,7 +204,6 @@ class GameOverMenu(Menu):
         Raises:
             SystemExit(0): naciśnięto klawisz 'exit' odpowiadający za zakończenie rozgrywki."""
 
-        print("entered game over menu")
         game.reset()
         while True:
             # sprawdzenie który przycisk został naciśnięty
@@ -249,7 +244,6 @@ class PauseMenu(Menu):
         Raises:
             SystemExit(0): naciśnięto klawisz 'exit' odpowiadający za zakończenie rozgrywki."""
 
-        print("entered pause menu")
         while True:
             # sprawdzenie który przycisk został naciśnięty
             button_number = check_which_button(self.buttons_objects, (pygame.K_ESCAPE, pygame.K_p))
@@ -289,7 +283,6 @@ class WinMenu(Menu):
         Raises:
             SystemExit(0): naciśnięto klawisz 'exit' odpowiadający za zakończenie rozgrywki."""
 
-        print("entered win menu")
         game.reset()  # resetuje stan gry (piłke, level, sędziego)
         while True:
             # sprawdzenie który przycisk został naciśnięty
@@ -325,7 +318,6 @@ def check_which_button(buttons_list, keys=None):
     """Zwraca numer wybranego przez użytkownika przycisku z listy otrzymanych jako argumenty,
     oraz 0 jeśli naciśnięto klawisz 'ESCAPE' lub 'P'."""
 
-    print("entered buttons check")
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:  # wciśnięto krzyżyk w prawym-górnym rogu okna programu
